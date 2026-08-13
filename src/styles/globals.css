@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --honey: #E6A84C;
+    --honey-dark: #C6862F;
+    --cream: #FFF8EE;
+    --brown: #5B3B2E;
+}
+
+html,
+body,
+#root {
+    height: 100%
+}
+
+body {
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Noto Sans JP', 'Helvetica Neue', Arial
+}
+
+.prose img {
+    max-width: 100%
+}
