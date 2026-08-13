@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ArticleList from './components/ArticleList';
 
 export default function Home() {
     return (
@@ -43,8 +44,10 @@ export default function Home() {
 
             <section className="py-8">
                 <h3 className="text-2xl font-bold">新着記事</h3>
-                <div className="grid md:grid-cols-3 gap-4 mt-4">
-                    <article className="p-4 border rounded">VLANとは？</article>
+                <div className="mt-4">
+                    {/* ArticleList reads from content/articles */}
+                    {/* @ts-ignore Server Component */}
+                    <ArticleList />
                 </div>
             </section>
         </main>
