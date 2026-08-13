@@ -13,44 +13,26 @@ export async function POST(req: NextRequest) {
     const token = m ? m[1] : null;
     if (!token) return NextResponse.json({ message: 'Missing token' }, { status: 401 });
 
-    // verify user via Supabase server client
     const { data: userData, error } = await supabaseServer.auth.getUser(token);
     if (error || !userData?.user) return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
     const email = userData.user.email || '';
     if (!ADMIN_EMAILS.includes(email)) return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
 
     const body = await req.json();
-    const { title, slug, content, description = '', category = '未分類', tags = [], thumbnail = '', readingTime } = body as { title: string; slug: string; content: string; description?: string; category?: string; tags?: string[]; thumbnail?: string; readingTime?: number };
-    if (!title || !slug) return NextResponse.json({ message: 'Missing fields' }, { status: 400 });
+    const { term, slug, description = '' } = body as { term: string; slug: string; description?: string };
+    if (!term || !slug) return NextResponse.json({ message: 'Missing fields' }, { status: 400 });
 
-    // prepare file content with extended frontmatter
-    const path = `content/articles/${slug}.md`;
-    const md = `---\n` +
-        `title: "${title}"\n` +
-        `description: "${String(description).replace(/"/g, '\\"')}"\n` +
-        `slug: "${slug}"\n` +
-        `date: "${new Date().toISOString().slice(0, 10)}"\n` +
-        `category: "${String(category).replace(/"/g, '\\"')}"\n` +
-        `tags: ${JSON.stringify(tags)}\n` +
-        `thumbnail: "${thumbnail}"\n` +
-        `${readingTime ? `readingTime: ${readingTime}\n` : ''}` +
-        `---\n\n${content}`;
+    const path = `content/glossary/${slug}.md`;
+    const md = `---\nterm: "${term}"\ntitle: "${term}"\ndescription: "${String(description).replace(/"/g, '\\"')}"\nslug: "${slug}"\n---\n\n${description}`;
 
-    // create file via GitHub API
     if (!GITHUB_TOKEN || !OWNER || !REPO) return NextResponse.json({ message: 'GitHub not configured' }, { status: 500 });
 
     const createRes = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(path)}`, {
         method: 'PUT',
-        headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
-            'Content-Type': 'application/json',
-            Accept: 'application/vnd.github+json'
-        },
-        body: JSON.stringify({ message: `Add article ${slug}`, content: Buffer.from(md).toString('base64'), branch: BRANCH })
+        headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github+json' },
+        body: JSON.stringify({ message: `Add glossary ${slug}`, content: Buffer.from(md).toString('base64'), branch: BRANCH })
     });
-
     const createJson = await createRes.json();
     if (!createRes.ok) return NextResponse.json({ message: 'GitHub API error', detail: createJson }, { status: 500 });
-
     return NextResponse.json({ ok: true, result: createJson });
 }
