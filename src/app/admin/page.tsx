@@ -126,6 +126,19 @@ export default function AdminPage() {
         setTitle(''); setSlug(''); setContent('');
     }
 
+    async function deleteArticle(file: any) {
+        const ok = confirm('この記事を削除してもよいですか？ 削除は取り消せません。');
+        if (!ok) return;
+        const token = (await supabase.auth.getSession()).data.session?.access_token;
+        if (!token) return alert('You must sign in');
+        const name = file.name.replace(/\.mdx?$|\.md$/, '');
+        const res = await fetch('/api/admin/delete-article', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ slug: name, sha: file.sha }) });
+        const j = await res.json();
+        if (!res.ok) return alert(j.message || 'Delete failed');
+        alert('Deleted');
+        fetchList();
+    }
+
     async function saveEdit(e: any) {
         e.preventDefault();
         if (!editing) return;
@@ -251,8 +264,9 @@ export default function AdminPage() {
                     {files.map(f => (
                         <div key={f.sha} className="p-3 border rounded flex justify-between items-center">
                             <div>{f.name}</div>
-                            <div>
+                            <div className="flex gap-2">
                                 <button onClick={() => editArticle(f)} className="px-3 py-1 text-sm border rounded">編集</button>
+                                <button onClick={() => deleteArticle(f)} className="px-3 py-1 text-sm border rounded text-red-600">削除</button>
                             </div>
                         </div>
                     ))}
