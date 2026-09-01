@@ -1,37 +1,57 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import Link from 'next/link';
-import { listArticles } from '../../lib/markdown';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArticleCard } from "@/components/ArticleCard";
+import { getAllArticles, getArticlesByCategory } from "@/lib/articles";
 
-type Post = { title: string; description?: string; slug: string };
+export const metadata: Metadata = {
+    title: "記事一覧",
+    description: "ITの基礎や仕組みを、初心者向けの読みやすい記事で学べます。",
+    alternates: { canonical: "/articles" },
+};
 
-export default function ArticlesPage() {
-    const dir = path.join(process.cwd(), 'content', 'articles');
-    let posts: Post[] = [];
-    try {
-        const files = listArticles();
-        posts = files.map((f) => {
-            const raw = fs.readFileSync(path.join(dir, f), 'utf-8');
-            const { data } = matter(raw);
-            const slug = (data.slug as string) || f.replace(/\.mdx?$/, '');
-            return { title: data.title as string, description: data.description as string | undefined, slug };
-        });
-    } catch (e) {
-        posts = [];
-    }
+type ArticlesPageProps = {
+    searchParams: Promise<{ category?: string }>;
+};
+
+export default async function ArticlesPage({ searchParams }: ArticlesPageProps) {
+    const { category } = await searchParams;
+    const articles = category ? getArticlesByCategory(category) : getAllArticles();
+    const categories = [...new Set(getAllArticles().map((article) => article.category))];
 
     return (
-        <main className="container mx-auto px-4 py-8">
-            <h1 className="text-2xl font-bold">記事一覧</h1>
-            <div className="grid md:grid-cols-2 gap-4 mt-6">
-                {posts.map(p => (
-                    <Link key={p.slug} href={`/articles/${p.slug}`} className="p-4 border rounded hover:shadow">
-                        <h3 className="font-semibold">{p.title}</h3>
-                        <p className="text-sm text-slate-600">{p.description}</p>
+        <div className="space-y-10">
+            <header className="max-w-2xl">
+                <p className="text-sm font-semibold text-amber-700">Huneyの記事</p>
+                <h1 className="mt-3 font-serif text-4xl font-bold tracking-tight text-amber-950 sm:text-5xl">記事一覧</h1>
+                <p className="mt-5 leading-8 text-amber-950/65">ITの仕組みを、初心者にも読みやすい言葉で整理しています。</p>
+            </header>
+
+            {categories.length > 0 && (
+                <nav aria-label="記事カテゴリ" className="flex flex-wrap gap-2">
+                    <Link href="/articles" className={`rounded-full px-4 py-2 text-sm font-semibold ${!category ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
+                        すべて
                     </Link>
-                ))}
-            </div>
-        </main>
+                    {categories.map((item) => (
+                        <Link key={item} href={`/articles?category=${encodeURIComponent(item)}`} className={`rounded-full px-4 py-2 text-sm font-semibold ${category === item ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
+                            {item}
+                        </Link>
+                    ))}
+                </nav>
+            )}
+
+            {articles.length > 0 ? (
+                <section aria-label="記事一覧" className="grid gap-6 md:grid-cols-2">
+                    {articles.map((article) => <ArticleCard key={article.slug} article={article} />)}
+                </section>
+            ) : (
+                <section className="rounded-2xl border border-dashed border-amber-950/20 bg-white/55 px-6 py-14 text-center">
+                    <h2 className="font-serif text-2xl font-bold text-amber-950">記事を準備しています</h2>
+                    <p className="mt-3 text-sm leading-7 text-amber-950/60">
+                        {category ? `「${category}」の記事はまだ公開されていません。` : "公開された記事は、ここに新しい順で表示されます。"}
+                    </p>
+                    {category && <Link href="/articles" className="mt-6 inline-block text-sm font-semibold text-amber-700 hover:text-amber-950">すべての記事を見る</Link>}
+                </section>
+            )}
+        </div>
     );
 }

@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+:root {
+    color-scheme: light;
+}
+
+body {
+    margin: 0;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.article-content {
+    color: rgb(69 45 20 / 0.8);
+    font-size: 1.05rem;
+    line-height: 2;
+}
+
+.article-content h2,
+.article-content h3 {
+    color: rgb(69 45 20);
+    font-family: Georgia, serif;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.article-content h2 {
+    border-left: 4px solid rgb(245 158 11);
+    font-size: 1.75rem;
+    margin: 3rem 0 1rem;
+    padding-left: 1rem;
+}
+
+.article-content h3 {
+    font-size: 1.35rem;
+    margin: 2rem 0 0.75rem;
+}
+
+.article-content p,
+.article-content ul,
+.article-content ol,
+.article-content blockquote,
+.article-content pre {
+    margin: 1rem 0;
+}
+
+.article-content ul,
+.article-content ol {
+    padding-left: 1.5rem;
+}
+
+.article-content ul {
+    list-style: disc;
+}
+
+.article-content ol {
+    list-style: decimal;
+}
+
+.article-content a {
+    color: rgb(180 83 9);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.article-content blockquote {
+    border-left: 3px solid rgb(217 119 6 / 0.5);
+    color: rgb(69 45 20 / 0.65);
+    padding-left: 1rem;
+}
+
+.article-content code {
+    border-radius: 0.25rem;
+    background: rgb(245 158 11 / 0.14);
+    padding: 0.15rem 0.35rem;
+    font-size: 0.9em;
+}
+
+.article-content pre {
+    overflow-x: auto;
+    border-radius: 0.75rem;
+    background: rgb(69 45 20);
+    color: rgb(255 251 235);
+    padding: 1rem;
+}
+
+.article-content pre code {
+    background: transparent;
+    padding: 0;
+}
+
+.article-content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    white-space: nowrap;
+}
+
+.article-content th,
+.article-content td {
+    border: 1px solid rgb(69 45 20 / 0.15);
+    padding: 0.65rem 0.8rem;
+    text-align: left;
+}
+
+.article-content th {
+    background: rgb(245 158 11 / 0.12);
+}

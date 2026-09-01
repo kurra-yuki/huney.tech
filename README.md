@@ -1,34 +1,7 @@
 # Huney.tech
 
-Minimal Next.js + TypeScript + Tailwind starter for the Huney.tech MVP.
+現在は設計書をもとにMVPの開発土台を整備する段階です。
 
-Quick start:
-
-```bash
-git clone <repo>
-cd huney.tech
-npm install
-npm run dev
-```
-
-Adding an article:
-
-1. Create a markdown file under `content/articles/` with frontmatter:
-
-```yaml
----
-title: "記事タイトル"
-description: "説明文"
-slug: "slug"
-date: "2026-08-13"
-category: "ネットワーク"
-tags: ["vlan"]
-thumbnail: "/images/articles/example.jpg"
-readingTime: 3
----
-
-本文...
-```
-
-2. Start dev server (`npm run dev`) and visit `/articles`.
+要件定義から運用設計までのドキュメントは `docs/` にまとめています。
+設計書に基づくNext.js App Routerの土台を構築した後、管理表のTask順に機能を実装します。
 # huney.tech

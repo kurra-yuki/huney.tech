@@ -1,33 +1,66 @@
-import Link from 'next/link';
+"use client";
 
-export default function Header() {
+import Link from "next/link";
+import { useState } from "react";
+
+const navigation = [
+    { href: "/articles", label: "記事" },
+    { href: "/glossary", label: "用語辞典" },
+    { href: "/videos", label: "動画" },
+    { href: "/profile", label: "プロフィール" },
+    { href: "/search", label: "検索" },
+];
+
+export function Header() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     return (
-        <header className="bg-white shadow-sm">
-            <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <Link href="/" className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full overflow-hidden bg-cream flex items-center justify-center">
-                            <img src="/images/icon.jpeg" alt="logo" className="w-10 h-10 object-cover" />
-                        </div>
-                        <div>
-                            <div className="text-lg font-bold text-brown">Huney.tech</div>
-                            <div className="text-xs text-slate-500">ITを、ひとさじ甘く。</div>
-                        </div>
-                    </Link>
-                </div>
+        <header className="border-b border-amber-950/10 bg-amber-50/95 backdrop-blur">
+            <div className="mx-auto flex min-h-16 max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+                <Link href="/" className="group flex items-baseline gap-2" onClick={() => setIsMenuOpen(false)}>
+                    <span className="font-serif text-2xl font-bold tracking-tight text-amber-950">Huney</span>
+                    <span className="hidden text-xs text-amber-900/70 sm:inline">はちみつと学ぶIT</span>
+                </Link>
 
-                <nav className="hidden md:flex items-center gap-6 text-sm text-slate-700">
-                    <Link href="/articles">記事</Link>
-                    <Link href="/glossary">用語辞典</Link>
-                    <Link href="/videos">動画</Link>
-                    <Link href="/profile">プロフィール</Link>
+                <nav aria-label="メインナビゲーション" className="hidden items-center gap-1 md:flex">
+                    {navigation.map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            className="rounded-full px-4 py-2 text-sm font-medium text-amber-950/75 transition-colors hover:bg-amber-100 hover:text-amber-950"
+                        >
+                            {item.label}
+                        </Link>
+                    ))}
                 </nav>
 
-                <div className="hidden md:flex items-center gap-2">
-                    <input aria-label="サイト内検索" placeholder="キーワードで検索" className="px-3 py-2 border rounded-l-md" />
-                    <button className="px-3 py-2 bg-honey text-white rounded-r-md">検索</button>
-                </div>
+                <button
+                    type="button"
+                    className="rounded-lg border border-amber-950/15 px-3 py-2 text-sm font-medium text-amber-950 md:hidden"
+                    aria-expanded={isMenuOpen}
+                    aria-controls="mobile-navigation"
+                    onClick={() => setIsMenuOpen((open) => !open)}
+                >
+                    {isMenuOpen ? "閉じる" : "メニュー"}
+                </button>
             </div>
+
+            {isMenuOpen && (
+                <nav id="mobile-navigation" aria-label="モバイルナビゲーション" className="border-t border-amber-950/10 px-4 py-3 md:hidden">
+                    <div className="mx-auto grid max-w-6xl gap-1 sm:px-2">
+                        {navigation.map((item) => (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className="rounded-lg px-3 py-3 text-sm font-medium text-amber-950/80 hover:bg-amber-100"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                {item.label}
+                            </Link>
+                        ))}
+                    </div>
+                </nav>
+            )}
         </header>
     );
 }
