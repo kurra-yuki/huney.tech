@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- Apache HTTP Server
-- Webサーバー
-- Apache Tomcat
+- [Apache HTTP Server](/glossary/apache-http-server)
+- [Webサーバー](/glossary/web-server)
+- [Apache Tomcat](/glossary/tomcat)
 
 ## 関連記事
 

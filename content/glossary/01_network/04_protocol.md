@@ -33,10 +33,10 @@ summary: >-
 
 ## 関連用語
 
-- TCP
+- [TCP](/glossary/tcp)
 - IP
-- HTTP
-- DNS
+- [HTTP](/glossary/http)
+- [DNS](/glossary/dns)
 
 ## 関連記事
 

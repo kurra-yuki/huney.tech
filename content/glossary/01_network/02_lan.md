@@ -33,7 +33,7 @@ summary: >-
 
 ## 関連用語
 
-- WAN
+- [WAN](/glossary/wan)
 - スイッチ
 - ルーター
 

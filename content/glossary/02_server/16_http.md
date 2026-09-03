@@ -33,8 +33,8 @@ summary: >-
 
 ## 関連用語
 
-- HTTPS
-- Webサーバー
+- [HTTPS](/glossary/https)
+- [Webサーバー](/glossary/web-server)
 - リクエスト
 - レスポンス
 

@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- Amazon VPC
-- サブネット
-- Amazon RDS
+- [Amazon VPC](/glossary/vpc)
+- [サブネット](/glossary/subnet)
+- [Amazon RDS](/glossary/rds)
 
 ## 関連記事
 

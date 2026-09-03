@@ -33,9 +33,9 @@ VPC内のリソースを配置する単位のひとつです。AWSのサブネ�
 
 ## 関連用語
 
-- Amazon VPC
-- CIDR
-- アベイラビリティーゾーン
+- [Amazon VPC](/glossary/vpc)
+- [CIDR](/glossary/cidr)
+- [アベイラビリティーゾーン](/glossary/availability-zone)
 
 ## 関連記事
 

@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- オンプレミス
-- パブリッククラウド
-- クラウド
+- [オンプレミス](/glossary/on-premises)
+- [パブリッククラウド](/glossary/public-cloud)
+- [クラウド](/glossary/cloud)
 
 ## 関連記事
 

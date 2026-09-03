@@ -33,7 +33,7 @@ LGWANは総合行政ネットワークとも呼ばれ、地方公共団体の組
 
 ## 関連用語
 
-- 三層分離
+- [三層分離](/glossary/three-layer-separation)
 - LGWAN接続系
 
 ## 関連記事

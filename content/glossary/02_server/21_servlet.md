@@ -32,9 +32,9 @@ JavaのWebアプリケーションで利用される技術です。Tomcatなど�
 
 ## 関連用語
 
-- Apache Tomcat
-- Webコンテナ
-- JSP
+- [Apache Tomcat](/glossary/tomcat)
+- [Webコンテナ](/glossary/web-container)
+- [JSP](/glossary/jsp)
 
 ## 関連記事
 

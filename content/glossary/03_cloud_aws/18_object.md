@@ -33,8 +33,8 @@ summary: >-
 
 ## 関連用語
 
-- Amazon S3
-- S3バケット
+- [Amazon S3](/glossary/s3)
+- [S3バケット](/glossary/bucket)
 - オブジェクトキー
 
 ## 関連記事

@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- Linux
-- Linuxディストリビューション
-- OS
+- [Linux](/glossary/linux)
+- [Linuxディストリビューション](/glossary/linux-distribution)
+- [OS](/glossary/os)
 
 ## 関連記事
 

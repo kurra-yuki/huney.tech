@@ -37,7 +37,7 @@ summary: >-
 - データリンク層
 - ネットワーク層
 - トランスポート層
-- TCP/IP
+- [TCP/IP](/glossary/tcp-ip)
 
 ## 関連記事
 

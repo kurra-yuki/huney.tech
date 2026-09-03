@@ -33,9 +33,9 @@ EC2などのリソースに対して、許可するインバウンド・アウ�
 
 ## 関連用語
 
-- Amazon EC2
-- Amazon VPC
-- ネットワークACL
+- [Amazon EC2](/glossary/ec2)
+- [Amazon VPC](/glossary/vpc)
+- [ネットワークACL](/glossary/network-acl)
 
 ## 関連記事
 

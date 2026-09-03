@@ -33,8 +33,8 @@ RDSなどで、複数AZを利用して障害時の可用性向上を図るため
 
 ## 関連用語
 
-- Amazon RDS
-- アベイラビリティーゾーン
+- [Amazon RDS](/glossary/rds)
+- [アベイラビリティーゾーン](/glossary/availability-zone)
 - 高可用性
 
 ## 関連記事

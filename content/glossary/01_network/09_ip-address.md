@@ -33,10 +33,10 @@ summary: >-
 
 ## 関連用語
 
-- IPv4
-- IPv6
-- サブネットマスク
-- ルーティング
+- [IPv4](/glossary/ipv4)
+- [IPv6](/glossary/ipv6)
+- [サブネットマスク](/glossary/subnet-mask)
+- [ルーティング](/glossary/routing)
 
 ## 関連記事
 

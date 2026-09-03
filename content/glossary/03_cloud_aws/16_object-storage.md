@@ -33,7 +33,7 @@ summary: >-
 
 ## 関連用語
 
-- Amazon S3
+- [Amazon S3](/glossary/s3)
 - オブジェクト
 - ブロックストレージ
 

@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- Firewall
+- [Firewall](/glossary/firewall)
 - ネットワーク分離
-- 三層分離
+- [三層分離](/glossary/three-layer-separation)
 
 ## 関連記事
 

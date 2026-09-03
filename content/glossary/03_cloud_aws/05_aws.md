@@ -33,10 +33,10 @@ summary: >-
 
 ## 関連用語
 
-- Amazon EC2
-- Amazon S3
-- Amazon VPC
-- Amazon RDS
+- [Amazon EC2](/glossary/ec2)
+- [Amazon S3](/glossary/s3)
+- [Amazon VPC](/glossary/vpc)
+- [Amazon RDS](/glossary/rds)
 
 ## 関連記事
 

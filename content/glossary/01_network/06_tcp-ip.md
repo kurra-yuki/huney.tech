@@ -33,10 +33,10 @@ TCPやIPを中心に、インターネットなどで利用されるさまざま
 
 ## 関連用語
 
-- TCP
-- UDP
+- [TCP](/glossary/tcp)
+- [UDP](/glossary/udp)
 - IP
-- DNS
+- [DNS](/glossary/dns)
 
 ## 関連記事
 

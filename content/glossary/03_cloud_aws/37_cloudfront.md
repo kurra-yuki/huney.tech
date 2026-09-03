@@ -33,10 +33,10 @@ summary: >-
 
 ## 関連用語
 
-- CDN
-- オリジン
-- エッジロケーション
-- キャッシュ
+- [CDN](/glossary/cdn)
+- [オリジン](/glossary/origin)
+- [エッジロケーション](/glossary/edge-location)
+- [キャッシュ](/glossary/cache)
 
 ## 関連記事
 

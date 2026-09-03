@@ -62,7 +62,7 @@ function getArticleFiles(dir = articlesDirectory): string[] {
         }
 
         return [];
-    });
+    }).sort((a, b) => a.localeCompare(b));
 }
 
 export function getAllArticles(): ArticleSummary[] {
@@ -104,6 +104,48 @@ export function getLatestArticles(limit = 3): ArticleSummary[] {
 
 export function getArticlesByCategory(category: string) {
     return getAllArticles().filter((article) => article.category === category);
+}
+
+export function getAdjacentsArticles(slug: string): { previous: ArticleSummary | null; next: ArticleSummary | null } {
+    const articlesBySlug = new Map(getAllArticles().map((article) => [article.slug, article]));
+    const articles = getArticleFiles().flatMap((filePath) => {
+        const parsed = matter(fs.readFileSync(filePath, "utf8"));
+        const article = articlesBySlug.get(parsed.data.slug);
+        return article ? [article] : [];
+    });
+    const currentIndex = articles.findIndex((article) => article.slug === slug);
+
+    if (currentIndex === -1) {
+        return { previous: null, next: null };
+    }
+
+    const previous = currentIndex > 0 ? articles[currentIndex - 1] : null;
+    const next = currentIndex < articles.length - 1 ? articles[currentIndex + 1] : null;
+
+    return { previous, next };
+}
+
+export function getNextArticle(slug: string): ArticleSummary | null {
+    const articles = getAllArticles();
+    const currentIndex = articles.findIndex((article) => article.slug === slug);
+
+    if (currentIndex === -1) {
+        return null;
+    }
+
+    const currentArticle = articles[currentIndex];
+    const sameCategoryArticles = articles.filter((article) => article.category === currentArticle.category);
+    const categoryIndex = sameCategoryArticles.findIndex((article) => article.slug === slug);
+
+    if (sameCategoryArticles.length > 1 && categoryIndex !== -1) {
+        const nextCategoryArticle = sameCategoryArticles[categoryIndex + 1] ?? sameCategoryArticles[0];
+        if (nextCategoryArticle && nextCategoryArticle.slug !== slug) {
+            return nextCategoryArticle;
+        }
+    }
+
+    const nextArticle = articles[currentIndex + 1] ?? articles[0];
+    return nextArticle && nextArticle.slug !== slug ? nextArticle : null;
 }
 
 export function getArticleBySlug(slug: string): ArticleDetail | null {

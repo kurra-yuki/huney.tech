@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- サーバーレス
-- Lambda関数
-- イベント駆動
+- [サーバーレス](/glossary/serverless)
+- [Lambda関数](/glossary/lambda-function)
+- [イベント駆動](/glossary/event-driven)
 
 ## 関連記事
 

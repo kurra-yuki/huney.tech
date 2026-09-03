@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- AWS Lambda
-- イベント駆動
-- サーバーレス
+- [AWS Lambda](/glossary/lambda)
+- [イベント駆動](/glossary/event-driven)
+- [サーバーレス](/glossary/serverless)
 
 ## 関連記事
 

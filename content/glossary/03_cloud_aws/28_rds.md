@@ -33,9 +33,9 @@ MySQL、PostgreSQL、Amazon Auroraなど複数のデータベースエンジン�
 
 ## 関連用語
 
-- リレーショナルデータベース
-- Amazon Aurora
-- Multi-AZ
+- [リレーショナルデータベース](/glossary/relational-database)
+- [Amazon Aurora](/glossary/aurora)
+- [Multi-AZ](/glossary/multi-az)
 
 ## 関連記事
 

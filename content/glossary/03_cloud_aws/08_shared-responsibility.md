@@ -33,9 +33,9 @@ AWSがクラウド基盤側を担当し、利用者もデータや設定など�
 
 ## 関連用語
 
-- AWS
+- [AWS](/glossary/aws)
 - IAM
-- クラウド
+- [クラウド](/glossary/cloud)
 
 ## 関連記事
 

@@ -33,10 +33,10 @@ CIDRブロックを指定してネットワークを作成し、その中にサ�
 
 ## 関連用語
 
-- サブネット
-- ルートテーブル
-- インターネットゲートウェイ
-- セキュリティグループ
+- [サブネット](/glossary/subnet)
+- [ルートテーブル](/glossary/route-table)
+- [インターネットゲートウェイ](/glossary/internet-gateway)
+- [セキュリティグループ](/glossary/security-group)
 
 ## 関連記事
 

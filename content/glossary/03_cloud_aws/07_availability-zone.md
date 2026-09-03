@@ -33,8 +33,8 @@ summary: >-
 
 ## 関連用語
 
-- リージョン
-- Multi-AZ
+- [リージョン](/glossary/region)
+- [Multi-AZ](/glossary/multi-az)
 - 高可用性
 
 ## 関連記事

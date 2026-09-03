@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { marked } from "marked";
-import { getArticleBySlug } from "@/lib/articles";
+import { getArticleBySlug, getAllArticles, getAdjacentsArticles, getNextArticle } from "@/lib/articles";
 
 type ArticlePageProps = {
     params: Promise<{ slug: string }>;
@@ -41,7 +41,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     }
 
     const articleHtml = marked.parse(article.content, { async: false });
-    const relatedArticles = article.relatedArticles ?? [];
+    const relatedArticleLinks = (article.relatedArticles ?? [])
+        .map((relatedSlug) => getAllArticles().find((candidate) => candidate.slug === relatedSlug))
+        .filter((relatedArticle): relatedArticle is NonNullable<typeof relatedArticle> => relatedArticle !== undefined);
+    const { previous, next } = getAdjacentsArticles(article.slug);
+    const nextArticle = getNextArticle(article.slug);
 
     return (
         <div className="mx-auto max-w-3xl">
@@ -49,6 +53,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 <Link href="/" className="hover:text-amber-700">TOP</Link>
                 <span className="mx-2">&gt;</span>
                 <Link href="/articles" className="hover:text-amber-700">記事</Link>
+                <span className="mx-2">&gt;</span>
+                <span>{article.category}</span>
                 <span className="mx-2">&gt;</span>
                 <span aria-current="page">{article.title}</span>
             </nav>
@@ -86,13 +92,47 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 </aside>
             )}
 
-            {relatedArticles.length > 0 && (
+            {(previous || next) && (
+                <nav aria-label="前後の記事ナビゲーション" className="mt-12 grid gap-4 border-t border-amber-950/10 pt-8 md:grid-cols-2">
+                    <div className="text-left">
+                        {previous ? (
+                            <Link href={`/articles/${previous.slug}`} className="inline-flex flex-col rounded-xl border border-amber-200 bg-amber-50 p-4 text-left transition hover:border-amber-300 hover:bg-amber-100">
+                                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">前の記事</span>
+                                <span className="mt-2 font-serif text-xl font-bold text-amber-950">{previous.title}</span>
+                            </Link>
+                        ) : <div className="rounded-xl border border-dashed border-amber-200 bg-amber-50/50 p-4 text-sm text-amber-950/40">前の記事はありません</div>}
+                    </div>
+                    <div className="text-left md:text-right">
+                        {next ? (
+                            <Link href={`/articles/${next.slug}`} className="inline-flex flex-col rounded-xl border border-amber-200 bg-amber-50 p-4 text-left md:text-right transition hover:border-amber-300 hover:bg-amber-100">
+                                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">次の記事</span>
+                                <span className="mt-2 font-serif text-xl font-bold text-amber-950">{next.title}</span>
+                            </Link>
+                        ) : <div className="rounded-xl border border-dashed border-amber-200 bg-amber-50/50 p-4 text-sm text-amber-950/40 md:text-right">次の記事はありません</div>}
+                    </div>
+                </nav>
+            )}
+
+            {nextArticle && (
+                <aside className="mt-12 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+                    <p className="text-sm font-semibold text-amber-800">次におすすめ</p>
+                    <h2 className="mt-2 font-serif text-2xl font-bold text-amber-950">{nextArticle.title}</h2>
+                    <p className="mt-3 text-sm leading-6 text-amber-950/65">{nextArticle.description}</p>
+                    <Link href={`/articles/${nextArticle.slug}`} className="mt-4 inline-block rounded-full bg-amber-950 px-5 py-3 text-sm font-semibold text-amber-50 hover:bg-amber-800">
+                        次の記事を見る
+                    </Link>
+                </aside>
+            )}
+
+            {relatedArticleLinks.length > 0 && (
                 <aside className="mt-12 border-t border-amber-950/10 pt-8">
                     <h2 className="font-serif text-2xl font-bold text-amber-950">関連記事</h2>
-                    <ul className="mt-4 space-y-3">
-                        {relatedArticles.map((relatedSlug) => (
-                            <li key={relatedSlug}>
-                                <Link href={`/articles/${relatedSlug}`} className="text-amber-700 hover:text-amber-950">{relatedSlug}</Link>
+                    <ul className="mt-4 grid gap-4 md:grid-cols-2">
+                        {relatedArticleLinks.map((relatedArticle) => (
+                            <li key={relatedArticle.slug} className="rounded-2xl border border-amber-200 bg-amber-50/60 p-5 transition hover:-translate-y-0.5 hover:border-amber-300 hover:bg-amber-50">
+                                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">記事</p>
+                                <Link href={`/articles/${relatedArticle.slug}`} className="mt-2 block font-serif text-xl font-bold text-amber-950 hover:text-amber-700">{relatedArticle.title}</Link>
+                                <p className="mt-3 text-sm leading-6 text-amber-950/65">{relatedArticle.description}</p>
                             </li>
                         ))}
                     </ul>

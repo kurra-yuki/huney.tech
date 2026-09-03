@@ -33,7 +33,7 @@ summary: >-
 
 ## 関連用語
 
-- UDP
+- [UDP](/glossary/udp)
 - IP
 - ポート番号
 

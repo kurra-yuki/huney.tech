@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { getAllArticles } from "@/lib/articles";
 import type { GlossaryEntry, GlossaryFrontmatter } from "@/types/glossary";
 
 const glossaryDirectory = path.join(process.cwd(), "content/glossary");
@@ -46,6 +47,103 @@ function getGlossaryFiles(dir = glossaryDirectory): string[] {
     });
 }
 
+function normalizeValue(value: string) {
+    return value
+        .toLowerCase()
+        .replace(/[\s\-_]+/g, "")
+        .replace(/[\p{P}\p{S}]+/gu, "");
+}
+
+function getGlossaryLookupEntries() {
+    return getGlossaryFiles()
+        .map((filePath) => {
+            const entry = readEntry(filePath);
+            return entry.draft ? null : entry;
+        })
+        .filter((entry): entry is GlossaryEntry => entry !== null);
+}
+
+function getSectionLinks(content: string, sectionTitle: "関連用語" | "関連記事"): string[] {
+    const lines = content.split(/\r?\n/);
+    let inSection = false;
+    const slugs: string[] = [];
+
+    for (const line of lines) {
+        const trimmed = line.trim();
+
+        if (/^##\s+/.test(trimmed)) {
+            const title = trimmed.replace(/^##\s+/, "").trim();
+
+            if (inSection && title !== sectionTitle) {
+                break;
+            }
+
+            if (title === sectionTitle) {
+                inSection = true;
+                continue;
+            }
+        }
+
+        if (!inSection) continue;
+
+        const markdownLinkMatch = trimmed.match(/\[([^\]]+)\]\((\/+(?:articles|glossary)\/[^)]*)\)/);
+        if (markdownLinkMatch) {
+            const label = markdownLinkMatch[1];
+            const href = markdownLinkMatch[2];
+            const possibleSlug = href.split("/").filter(Boolean).at(-1);
+
+            if (possibleSlug && possibleSlug !== "articles" && possibleSlug !== "glossary") {
+                slugs.push(possibleSlug);
+                continue;
+            }
+
+            const articleCandidates = getAllArticles();
+            const glossaryCandidates = getGlossaryLookupEntries();
+            const targetList = href.includes("/articles/") ? articleCandidates : glossaryCandidates;
+            const normalizedLabel = normalizeValue(label);
+
+            const matched = targetList.find((candidate) => {
+                const candidateValue = "title" in candidate ? candidate.title : candidate.term;
+                return normalizeValue(candidateValue).includes(normalizedLabel) || normalizedLabel.includes(normalizeValue(candidateValue));
+            });
+
+            if (matched) {
+                slugs.push(matched.slug);
+            }
+            continue;
+        }
+
+        const slugMatch = trimmed.match(/\/+(?:articles|glossary)\/([a-z0-9]+(?:-[a-z0-9]+)*)/i);
+        if (slugMatch) {
+            slugs.push(slugMatch[1]);
+        }
+    }
+
+    return [...new Set(slugs)];
+}
+
+function normalizeRelatedSlugs(values: string[] | undefined): string[] {
+    const normalized = (values ?? []).filter((value) => typeof value === "string" && value.trim().length > 0);
+    return [...new Set(normalized)];
+}
+
+export function resolveGlossaryRelationshipLinks(entry: GlossaryEntry) {
+    const relatedTerms = normalizeRelatedSlugs([
+        ...(entry.relatedTerms ?? []),
+        ...getSectionLinks(entry.content, "関連用語"),
+    ]);
+
+    const relatedArticles = normalizeRelatedSlugs([
+        ...(entry.relatedArticles ?? []),
+        ...getSectionLinks(entry.content, "関連記事"),
+    ]);
+
+    return {
+        relatedTerms,
+        relatedArticles,
+    };
+}
+
 function readEntry(filePath: string): GlossaryEntry {
     const source = fs.readFileSync(filePath, "utf8");
     const parsed = matter(source);
@@ -62,7 +160,16 @@ export function getAllGlossaryEntries() {
         return entry.draft ? [] : [entry];
     });
 
-    return entries.sort((a, b) => a.term.localeCompare(b.term, "ja"));
+    return entries
+        .map((entry) => {
+            const relationships = resolveGlossaryRelationshipLinks(entry);
+            return {
+                ...entry,
+                relatedTerms: relationships.relatedTerms,
+                relatedArticles: relationships.relatedArticles,
+            };
+        })
+        .sort((a, b) => a.term.localeCompare(b.term, "ja"));
 }
 
 export function getGlossaryBySlug(slug: string) {
@@ -73,5 +180,12 @@ export function getGlossaryBySlug(slug: string) {
 
     if (!filePath) return null;
     const entry = readEntry(filePath);
-    return entry.draft ? null : entry;
+    if (entry.draft) return null;
+
+    const relationships = resolveGlossaryRelationshipLinks(entry);
+    return {
+        ...entry,
+        relatedTerms: relationships.relatedTerms,
+        relatedArticles: relationships.relatedArticles,
+    };
 }

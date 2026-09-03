@@ -33,9 +33,9 @@ HTTPリクエストの受け付けやServletの実行など、Java Webアプリ�
 
 ## 関連用語
 
-- Apache Tomcat
-- Servlet
-- JSP
+- [Apache Tomcat](/glossary/tomcat)
+- [Servlet](/glossary/servlet)
+- [JSP](/glossary/jsp)
 
 ## 関連記事
 

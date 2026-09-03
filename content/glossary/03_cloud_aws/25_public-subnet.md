@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- Amazon VPC
-- サブネット
-- インターネットゲートウェイ
+- [Amazon VPC](/glossary/vpc)
+- [サブネット](/glossary/subnet)
+- [インターネットゲートウェイ](/glossary/internet-gateway)
 
 ## 関連記事
 

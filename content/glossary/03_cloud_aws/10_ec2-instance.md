@@ -33,9 +33,9 @@ CPUやメモリなどの構成をインスタンスタイプから選択し、AM
 
 ## 関連用語
 
-- Amazon EC2
-- インスタンスタイプ
-- AMI
+- [Amazon EC2](/glossary/ec2)
+- [インスタンスタイプ](/glossary/instance-type)
+- [AMI](/glossary/ami)
 
 ## 関連記事
 

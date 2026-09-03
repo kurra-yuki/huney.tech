@@ -33,9 +33,9 @@ Jakarta Server Pagesの略で、Java系Webアプリケーションで動的なWe
 
 ## 関連用語
 
-- Apache Tomcat
-- Servlet
-- 動的コンテンツ
+- [Apache Tomcat](/glossary/tomcat)
+- [Servlet](/glossary/servlet)
+- [動的コンテンツ](/glossary/dynamic-content)
 
 ## 関連記事
 

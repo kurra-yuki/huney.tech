@@ -34,7 +34,7 @@ summary: >-
 
 ## 関連用語
 
-- Linux
+- [Linux](/glossary/linux)
 - コマンド
 - シェル
 

@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- NAT
+- [NAT](/glossary/nat)
 - ポート番号
-- プライベートIPアドレス
+- [プライベートIPアドレス](/glossary/private-ip)
 
 ## 関連記事
 

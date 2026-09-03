@@ -33,10 +33,10 @@ summary: >-
 
 ## 関連用語
 
-- Apache HTTP Server
-- HTTP
-- HTTPS
-- リバースプロキシ
+- [Apache HTTP Server](/glossary/apache-http-server)
+- [HTTP](/glossary/http)
+- [HTTPS](/glossary/https)
+- [リバースプロキシ](/glossary/reverse-proxy)
 
 ## 関連記事
 

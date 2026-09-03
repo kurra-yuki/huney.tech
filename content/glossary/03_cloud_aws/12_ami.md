@@ -33,8 +33,8 @@ OSやソフトウェアなど、EC2インスタンスを起動するためのテ
 
 ## 関連用語
 
-- Amazon EC2
-- EC2インスタンス
+- [Amazon EC2](/glossary/ec2)
+- [EC2インスタンス](/glossary/ec2-instance)
 - Amazon Linux
 
 ## 関連記事

@@ -33,11 +33,11 @@ Apache Software Foundationが開発するオープンソースのWebサーバー
 
 ## 関連用語
 
-- Webサーバー
-- HTTP
-- HTTPS
-- リバースプロキシ
-- Apache Tomcat
+- [Webサーバー](/glossary/web-server)
+- [HTTP](/glossary/http)
+- [HTTPS](/glossary/https)
+- [リバースプロキシ](/glossary/reverse-proxy)
+- [Apache Tomcat](/glossary/tomcat)
 
 ## 関連記事
 

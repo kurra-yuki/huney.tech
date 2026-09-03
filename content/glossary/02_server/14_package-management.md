@@ -33,7 +33,7 @@ Linuxディストリビューションでは、ソフトウェアをパッケー
 
 ## 関連用語
 
-- Linuxディストリビューション
+- [Linuxディストリビューション](/glossary/linux-distribution)
 - APT
 - DNF
 

@@ -33,9 +33,9 @@ Linuxの管理作業などで、必要なコマンドだけを高い権限で実
 
 ## 関連用語
 
-- root
-- Linux
-- パーミッション
+- [root](/glossary/root)
+- [Linux](/glossary/linux)
+- [パーミッション](/glossary/permission)
 
 ## 関連記事
 

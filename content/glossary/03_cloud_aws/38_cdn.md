@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- Amazon CloudFront
-- エッジロケーション
-- キャッシュ
+- [Amazon CloudFront](/glossary/cloudfront)
+- [エッジロケーション](/glossary/edge-location)
+- [キャッシュ](/glossary/cache)
 
 ## 関連記事
 

@@ -33,9 +33,9 @@ HTTPによる通信をTLSで保護し、通信内容の暗号化や通信相手�
 
 ## 関連用語
 
-- HTTP
+- [HTTP](/glossary/http)
 - TLS
-- Webサーバー
+- [Webサーバー](/glossary/web-server)
 
 ## 関連記事
 

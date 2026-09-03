@@ -33,10 +33,10 @@ Linuxカーネルに基本コマンドやパッケージ管理ツールなどを
 
 ## 関連用語
 
-- Linux
+- [Linux](/glossary/linux)
 - Ubuntu
 - Amazon Linux
-- パッケージ管理
+- [パッケージ管理](/glossary/package-management)
 
 ## 関連記事
 

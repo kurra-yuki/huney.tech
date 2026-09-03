@@ -32,10 +32,10 @@ summary: >-
 
 ## 関連用語
 
-- Linuxカーネル
-- Linuxディストリビューション
-- CLI
-- root
+- [Linuxカーネル](/glossary/linux-kernel)
+- [Linuxディストリビューション](/glossary/linux-distribution)
+- [CLI](/glossary/cli)
+- [root](/glossary/root)
 
 ## 関連記事
 

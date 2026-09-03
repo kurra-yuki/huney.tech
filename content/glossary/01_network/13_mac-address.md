@@ -33,9 +33,9 @@ OSI参照モデルのデータリンク層と深く関係します。Ethernetで
 
 ## 関連用語
 
-- ARP
+- [ARP](/glossary/arp)
 - L2スイッチ
-- IPアドレス
+- [IPアドレス](/glossary/ip-address)
 
 ## 関連記事
 

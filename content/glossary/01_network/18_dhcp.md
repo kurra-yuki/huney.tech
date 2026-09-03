@@ -33,8 +33,8 @@ summary: >-
 
 ## 関連用語
 
-- IPアドレス
-- デフォルトゲートウェイ
+- [IPアドレス](/glossary/ip-address)
+- [デフォルトゲートウェイ](/glossary/default-gateway)
 - DHCPリレー
 
 ## 関連記事

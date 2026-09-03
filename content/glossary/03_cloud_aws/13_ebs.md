@@ -33,8 +33,8 @@ EC2インスタンスに接続し、OSやデータを保存するディスクの
 
 ## 関連用語
 
-- Amazon EC2
-- Amazon S3
+- [Amazon EC2](/glossary/ec2)
+- [Amazon S3](/glossary/s3)
 - ブロックストレージ
 
 ## 関連記事

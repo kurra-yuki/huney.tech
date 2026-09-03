@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- sudo
-- パーミッション
-- Linux
+- [sudo](/glossary/sudo)
+- [パーミッション](/glossary/permission)
+- [Linux](/glossary/linux)
 
 ## 関連記事
 

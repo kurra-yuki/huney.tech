@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- サブネットマスク
-- IPアドレス
-- ルーティング
+- [サブネットマスク](/glossary/subnet-mask)
+- [IPアドレス](/glossary/ip-address)
+- [ルーティング](/glossary/routing)
 
 ## 関連記事
 

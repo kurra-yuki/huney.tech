@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- Amazon VPC
-- セキュリティグループ
-- サブネット
+- [Amazon VPC](/glossary/vpc)
+- [セキュリティグループ](/glossary/security-group)
+- [サブネット](/glossary/subnet)
 
 ## 関連記事
 

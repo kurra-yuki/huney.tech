@@ -33,8 +33,8 @@ summary: >-
 
 ## 関連用語
 
-- 静的コンテンツ
-- Apache Tomcat
+- [静的コンテンツ](/glossary/static-content)
+- [Apache Tomcat](/glossary/tomcat)
 - Webアプリケーション
 
 ## 関連記事

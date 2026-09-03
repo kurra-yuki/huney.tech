@@ -32,10 +32,10 @@ Webページ、ファイル、データベースなどの機能やデータを�
 
 ## 関連用語
 
-- クライアント
-- Webサーバー
-- 仮想サーバー
-- OS
+- [クライアント](/glossary/client)
+- [Webサーバー](/glossary/web-server)
+- [仮想サーバー](/glossary/virtual-server)
+- [OS](/glossary/os)
 
 ## 関連記事
 

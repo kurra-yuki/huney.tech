@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- クラウド
-- ハイブリッドクラウド
-- サーバー
+- [クラウド](/glossary/cloud)
+- [ハイブリッドクラウド](/glossary/hybrid-cloud)
+- [サーバー](/glossary/server)
 
 ## 関連記事
 

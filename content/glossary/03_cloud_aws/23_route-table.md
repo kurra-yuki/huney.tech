@@ -33,9 +33,9 @@ VPC内の通信やインターネットなどへの通信経路を設定しま�
 
 ## 関連用語
 
-- Amazon VPC
-- ルーティング
-- インターネットゲートウェイ
+- [Amazon VPC](/glossary/vpc)
+- [ルーティング](/glossary/routing)
+- [インターネットゲートウェイ](/glossary/internet-gateway)
 
 ## 関連記事
 

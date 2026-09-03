@@ -34,8 +34,8 @@ IPアドレスやポート番号、通信状態などを確認して通信を制
 ## 関連用語
 
 - WAF
-- DMZ
-- NAT
+- [DMZ](/glossary/dmz)
+- [NAT](/glossary/nat)
 - ステートフルインスペクション
 
 ## 関連記事

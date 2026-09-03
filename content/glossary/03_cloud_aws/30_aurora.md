@@ -33,7 +33,7 @@ Amazon RDSで利用できるデータベースエンジンのひとつです。M
 
 ## 関連用語
 
-- Amazon RDS
+- [Amazon RDS](/glossary/rds)
 - MySQL
 - PostgreSQL
 

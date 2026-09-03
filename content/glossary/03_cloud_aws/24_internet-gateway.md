@@ -33,9 +33,9 @@ VPCへアタッチして利用します。ただし、IGWを付けるだけで�
 
 ## 関連用語
 
-- Amazon VPC
-- ルートテーブル
-- パブリックサブネット
+- [Amazon VPC](/glossary/vpc)
+- [ルートテーブル](/glossary/route-table)
+- [パブリックサブネット](/glossary/public-subnet)
 
 ## 関連記事
 

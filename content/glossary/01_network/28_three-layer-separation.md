@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- LGWAN
-- Firewall
-- VLAN
+- [LGWAN](/glossary/lgwan)
+- [Firewall](/glossary/firewall)
+- [VLAN](/glossary/vlan)
 - ネットワーク分離
 
 ## 関連記事

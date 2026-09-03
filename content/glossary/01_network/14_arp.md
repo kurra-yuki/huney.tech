@@ -33,8 +33,8 @@ IPv4とEthernetを利用するLANなどで、通信に必要なMACアドレス�
 
 ## 関連用語
 
-- IPv4
-- MACアドレス
+- [IPv4](/glossary/ipv4)
+- [MACアドレス](/glossary/mac-address)
 - Ethernet
 
 ## 関連記事

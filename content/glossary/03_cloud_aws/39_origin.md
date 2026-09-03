@@ -33,9 +33,9 @@ CloudFrontではAmazon S3やApplication Load Balancerなどをオリジンとし
 
 ## 関連用語
 
-- Amazon CloudFront
-- Amazon S3
-- CDN
+- [Amazon CloudFront](/glossary/cloudfront)
+- [Amazon S3](/glossary/s3)
+- [CDN](/glossary/cdn)
 
 ## 関連記事
 

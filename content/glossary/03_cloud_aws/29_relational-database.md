@@ -33,7 +33,7 @@ summary: >-
 
 ## 関連用語
 
-- Amazon RDS
+- [Amazon RDS](/glossary/rds)
 - SQL
 - データベース
 

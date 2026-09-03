@@ -33,7 +33,7 @@ summary: >-
 
 ## 関連用語
 
-- LAN
+- [LAN](/glossary/lan)
 - ルーター
 - インターネット
 

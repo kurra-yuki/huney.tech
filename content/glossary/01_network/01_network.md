@@ -33,10 +33,10 @@ summary: >-
 
 ## 関連用語
 
-- LAN
-- WAN
+- [LAN](/glossary/lan)
+- [WAN](/glossary/wan)
 - インターネット
-- プロトコル
+- [プロトコル](/glossary/protocol)
 
 ## 関連記事
 

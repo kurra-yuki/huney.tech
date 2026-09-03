@@ -33,9 +33,9 @@ HTML、CSS、JavaScriptファイル、画像など、保存されているファ
 
 ## 関連用語
 
-- Webサーバー
-- Apache HTTP Server
-- 動的コンテンツ
+- [Webサーバー](/glossary/web-server)
+- [Apache HTTP Server](/glossary/apache-http-server)
+- [動的コンテンツ](/glossary/dynamic-content)
 
 ## 関連記事
 

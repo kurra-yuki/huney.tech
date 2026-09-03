@@ -33,9 +33,9 @@ CloudFrontではオリジンから取得したコンテンツをエッジ側に�
 
 ## 関連用語
 
-- Amazon CloudFront
-- CDN
-- オリジン
+- [Amazon CloudFront](/glossary/cloudfront)
+- [CDN](/glossary/cdn)
+- [オリジン](/glossary/origin)
 
 ## 関連記事
 

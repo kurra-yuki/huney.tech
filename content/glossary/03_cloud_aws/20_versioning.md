@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- Amazon S3
-- S3バケット
-- S3オブジェクト
+- [Amazon S3](/glossary/s3)
+- [S3バケット](/glossary/bucket)
+- [S3オブジェクト](/glossary/object)
 
 ## 関連記事
 

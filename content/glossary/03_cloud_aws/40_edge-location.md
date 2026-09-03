@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- Amazon CloudFront
-- CDN
-- キャッシュ
+- [Amazon CloudFront](/glossary/cloudfront)
+- [CDN](/glossary/cdn)
+- [キャッシュ](/glossary/cache)
 
 ## 関連記事
 

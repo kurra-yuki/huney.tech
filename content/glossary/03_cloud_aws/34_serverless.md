@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- AWS Lambda
-- マネージドサービス
-- イベント駆動
+- [AWS Lambda](/glossary/lambda)
+- [マネージドサービス](/glossary/managed-service)
+- [イベント駆動](/glossary/event-driven)
 
 ## 関連記事
 

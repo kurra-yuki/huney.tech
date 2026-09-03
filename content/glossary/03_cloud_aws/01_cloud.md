@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- オンプレミス
-- AWS
-- パブリッククラウド
+- [オンプレミス](/glossary/on-premises)
+- [AWS](/glossary/aws)
+- [パブリッククラウド](/glossary/public-cloud)
 
 ## 関連記事
 

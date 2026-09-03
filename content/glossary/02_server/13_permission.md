@@ -33,9 +33,9 @@ Linuxでは読み取り、書き込み、実行などの権限を管理できま
 
 ## 関連用語
 
-- Linux
-- root
-- sudo
+- [Linux](/glossary/linux)
+- [root](/glossary/root)
+- [sudo](/glossary/sudo)
 
 ## 関連記事
 

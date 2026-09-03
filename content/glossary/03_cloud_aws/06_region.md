@@ -33,8 +33,8 @@ AWSでは世界各地にリージョンがあり、システムを構築する�
 
 ## 関連用語
 
-- アベイラビリティーゾーン
-- AWS
+- [アベイラビリティーゾーン](/glossary/availability-zone)
+- [AWS](/glossary/aws)
 
 ## 関連記事
 

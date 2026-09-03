@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- 物理サーバー
+- [物理サーバー](/glossary/physical-server)
 - 仮想化
-- Amazon EC2
+- [Amazon EC2](/glossary/ec2)
 
 ## 関連記事
 

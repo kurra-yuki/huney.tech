@@ -36,7 +36,7 @@ summary: >-
 - 名前解決
 - DNSレコード
 - TTL
-- IPアドレス
+- [IPアドレス](/glossary/ip-address)
 
 ## 関連記事
 

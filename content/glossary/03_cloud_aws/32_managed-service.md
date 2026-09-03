@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- Amazon RDS
-- AWS Lambda
-- 責任共有モデル
+- [Amazon RDS](/glossary/rds)
+- [AWS Lambda](/glossary/lambda)
+- [責任共有モデル](/glossary/shared-responsibility)
 
 ## 関連記事
 

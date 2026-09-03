@@ -33,8 +33,8 @@ summary: >-
 
 ## 関連用語
 
-- Amazon S3
-- オブジェクトストレージ
+- [Amazon S3](/glossary/s3)
+- [オブジェクトストレージ](/glossary/object-storage)
 
 ## 関連記事
 

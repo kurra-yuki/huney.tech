@@ -33,9 +33,9 @@ S3へのファイル保存などの出来事をきっかけにLambda関数を実
 
 ## 関連用語
 
-- AWS Lambda
-- Lambda関数
-- Amazon S3
+- [AWS Lambda](/glossary/lambda)
+- [Lambda関数](/glossary/lambda-function)
+- [Amazon S3](/glossary/s3)
 
 ## 関連記事
 

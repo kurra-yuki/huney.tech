@@ -33,10 +33,10 @@ Java ServletやJakarta Server PagesなどのWeb関連仕様を実装するオー
 
 ## 関連用語
 
-- Servlet
-- JSP
-- Webコンテナ
-- Apache HTTP Server
+- [Servlet](/glossary/servlet)
+- [JSP](/glossary/jsp)
+- [Webコンテナ](/glossary/web-container)
+- [Apache HTTP Server](/glossary/apache-http-server)
 
 ## 関連記事
 

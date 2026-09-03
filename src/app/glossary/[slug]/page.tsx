@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { marked } from "marked";
-import { getGlossaryBySlug } from "@/lib/glossary";
+import { getAllGlossaryEntries, getGlossaryBySlug } from "@/lib/glossary";
+import { getAllArticles } from "@/lib/articles";
 
 type GlossaryDetailProps = {
     params: Promise<{ slug: string }>;
@@ -26,6 +27,12 @@ export default async function GlossaryDetailPage({ params }: GlossaryDetailProps
     if (!entry) notFound();
 
     const contentHtml = marked.parse(entry.content, { async: false });
+    const relatedTermLinks = (entry.relatedTerms ?? [])
+        .map((relatedSlug) => getAllGlossaryEntries().find((candidate) => candidate.slug === relatedSlug))
+        .filter((relatedTerm): relatedTerm is NonNullable<typeof relatedTerm> => relatedTerm !== undefined);
+    const relatedArticleLinks = (entry.relatedArticles ?? [])
+        .map((articleSlug) => getAllArticles().find((candidate) => candidate.slug === articleSlug))
+        .filter((article): article is NonNullable<typeof article> => article !== undefined);
 
     return (
         <div className="mx-auto max-w-3xl">
@@ -33,6 +40,8 @@ export default async function GlossaryDetailPage({ params }: GlossaryDetailProps
                 <Link href="/" className="hover:text-amber-700">TOP</Link>
                 <span className="mx-2">&gt;</span>
                 <Link href="/glossary" className="hover:text-amber-700">用語辞典</Link>
+                <span className="mx-2">&gt;</span>
+                <span>{entry.category}</span>
                 <span className="mx-2">&gt;</span>
                 <span aria-current="page">{entry.term}</span>
             </nav>
@@ -47,20 +56,32 @@ export default async function GlossaryDetailPage({ params }: GlossaryDetailProps
 
             <div className="article-content mt-10" dangerouslySetInnerHTML={{ __html: contentHtml }} />
 
-            {entry.relatedTerms && entry.relatedTerms.length > 0 && (
+            {relatedTermLinks.length > 0 && (
                 <aside className="mt-12 border-t border-amber-950/10 pt-8">
                     <h2 className="font-serif text-2xl font-bold text-amber-950">関連用語</h2>
-                    <ul className="mt-4 flex flex-wrap gap-3">
-                        {entry.relatedTerms.map((relatedSlug) => <li key={relatedSlug}><Link href={`/glossary/${relatedSlug}`} className="rounded-full bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-900 hover:bg-amber-200">{relatedSlug}</Link></li>)}
+                    <ul className="mt-4 grid gap-4 md:grid-cols-2">
+                        {relatedTermLinks.map((relatedTerm) => (
+                            <li key={relatedTerm.slug} className="rounded-2xl border border-amber-200 bg-amber-50/60 p-5 transition hover:-translate-y-0.5 hover:border-amber-300 hover:bg-amber-50">
+                                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">用語</p>
+                                <Link href={`/glossary/${relatedTerm.slug}`} className="mt-2 block font-serif text-xl font-bold text-amber-950 hover:text-amber-700">{relatedTerm.term}</Link>
+                                <p className="mt-3 text-sm leading-6 text-amber-950/65">{relatedTerm.summary}</p>
+                            </li>
+                        ))}
                     </ul>
                 </aside>
             )}
 
-            {entry.relatedArticles && entry.relatedArticles.length > 0 && (
+            {relatedArticleLinks.length > 0 && (
                 <aside className="mt-10 border-t border-amber-950/10 pt-8">
                     <h2 className="font-serif text-2xl font-bold text-amber-950">関連する記事</h2>
-                    <ul className="mt-4 space-y-3">
-                        {entry.relatedArticles.map((articleSlug) => <li key={articleSlug}><Link href={`/articles/${articleSlug}`} className="text-amber-700 hover:text-amber-950">記事：{articleSlug}</Link></li>)}
+                    <ul className="mt-4 grid gap-4 md:grid-cols-2">
+                        {relatedArticleLinks.map((article) => (
+                            <li key={article.slug} className="rounded-2xl border border-amber-200 bg-amber-50/60 p-5 transition hover:-translate-y-0.5 hover:border-amber-300 hover:bg-amber-50">
+                                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">記事</p>
+                                <Link href={`/articles/${article.slug}`} className="mt-2 block font-serif text-xl font-bold text-amber-950 hover:text-amber-700">{article.title}</Link>
+                                <p className="mt-3 text-sm leading-6 text-amber-950/65">{article.description}</p>
+                            </li>
+                        ))}
                     </ul>
                 </aside>
             )}

@@ -36,7 +36,7 @@ summary: >-
 - VLAN ID
 - アクセスポート
 - トランクポート
-- IEEE 802.1Q
+- [IEEE 802.1Q](/glossary/8021q)
 
 ## 関連記事
 

@@ -33,9 +33,9 @@ summary: >-
 
 ## 関連用語
 
-- NAPT
-- プライベートIPアドレス
-- Firewall
+- [NAPT](/glossary/napt)
+- [プライベートIPアドレス](/glossary/private-ip)
+- [Firewall](/glossary/firewall)
 
 ## 関連記事
 
