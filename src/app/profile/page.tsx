@@ -37,6 +37,7 @@ export default function ProfilePage() {
                 <p className="mt-5 max-w-3xl leading-8 text-amber-950/70">
                     Huneyは、ネットワーク、クラウド、サーバー、セキュリティなどのIT技術を、初心者にも理解しやすい言葉で整理する学習サイトです。記事は「読む」、用語辞典は「調べる」、動画は「見る」ための入口として役割を分けています。
                 </p>
+                <p className="mt-4 max-w-3xl leading-8 text-amber-950/70">{profile.nameOrigin}</p>
             </section>
 
             <section aria-labelledby="policy-heading" className="grid gap-6 sm:grid-cols-3">
