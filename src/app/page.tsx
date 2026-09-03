@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleCard } from "@/components/ArticleCard";
 import { CategoryCard } from "@/components/CategoryCard";
-import { getLatestArticles } from "@/lib/articles";
+import { getAllArticles, getLatestArticles } from "@/lib/articles";
 
 export const metadata: Metadata = {
   title: "トップページ",
@@ -12,13 +12,15 @@ export const metadata: Metadata = {
 
 const categories = [
   { label: "ネットワーク", description: "つながる仕組みを、順番に理解する。" },
-  { label: "クラウド", description: "雲の向こう側にあるサービスを知る。" },
+  { label: "クラウド", category: "クラウド / AWS", description: "雲の向こう側にあるサービスを知る。" },
   { label: "セキュリティ", description: "守るための考え方をやさしく学ぶ。" },
   { label: "Linux", description: "サーバーを支える基本から始める。" },
 ];
 
 export default function Home() {
   const latestArticles = getLatestArticles(3);
+  const availableCategories = new Set(getAllArticles().map((article) => article.category));
+  const visibleCategories = categories.filter((category) => availableCategories.has(category.category ?? category.label));
 
   return (
     <div className="space-y-20">
@@ -70,7 +72,7 @@ export default function Home() {
           <Link href="/articles" className="text-sm font-semibold text-amber-700 hover:text-amber-950">記事一覧へ</Link>
         </div>
         <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map((category) => <CategoryCard key={category.label} {...category} />)}
+          {visibleCategories.map((category) => <CategoryCard key={category.label} {...category} />)}
         </div>
       </section>
 
