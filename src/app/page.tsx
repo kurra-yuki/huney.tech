@@ -12,15 +12,14 @@ export const metadata: Metadata = {
 
 const categories = [
   { label: "ネットワーク", description: "つながる仕組みを、順番に理解する。" },
-  { label: "クラウド", category: "クラウド / AWS", description: "雲の向こう側にあるサービスを知る。" },
-  { label: "セキュリティ", description: "守るための考え方をやさしく学ぶ。" },
-  { label: "Linux", description: "サーバーを支える基本から始める。" },
+  { label: "クラウド / AWS", description: "雲の向こう側にあるサービスを知る。" },
+  { label: "サーバー", description: "サーバーを支える基本から始める。" },
 ];
 
 export default function Home() {
   const latestArticles = getLatestArticles(3);
   const availableCategories = new Set(getAllArticles().map((article) => article.category));
-  const visibleCategories = categories.filter((category) => availableCategories.has(category.category ?? category.label));
+  const visibleCategories = categories.filter((category) => availableCategories.has(category.label));
 
   return (
     <div className="space-y-20">
