@@ -4,10 +4,10 @@
 
 ## サーバー
 
-1. [サーバーとは？](15_server.md)
-2. [Linuxとは？](16_linux.md)
-3. [Apacheとは？](17_apache.md)
-4. [Tomcatとは？](18_tomcat.md)
+1. [サーバーとは？](015_server.md)
+2. [Linuxとは？](016_linux.md)
+3. [Apacheとは？](017_apache.md)
+4. [Tomcatとは？](018_tomcat.md)
 
 ---
 

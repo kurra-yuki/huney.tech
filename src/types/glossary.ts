@@ -3,6 +3,7 @@ export type GlossaryFrontmatter = {
     slug: string;
     summary: string;
     categoryGroup?: string;
+    categorySubgroup?: string;
     reading?: string;
     officialName?: string;
     category: string;

@@ -10,18 +10,20 @@ export const metadata: Metadata = {
 };
 
 type ArticlesPageProps = {
-    searchParams: Promise<{ category?: string; group?: string }>;
+    searchParams: Promise<{ category?: string; group?: string; subgroup?: string }>;
 };
 
 export default async function ArticlesPage({ searchParams }: ArticlesPageProps) {
-    const { category, group } = await searchParams;
+    const { category, group, subgroup } = await searchParams;
     const allArticles = getAllArticles();
     const articles = allArticles.filter((article) => {
         if (group && article.categoryGroup !== group) return false;
+        if (subgroup && article.categorySubgroup !== subgroup) return false;
         return !category || article.category === category;
     });
     const groups = [...new Set(allArticles.map((article) => article.categoryGroup).filter((group): group is string => Boolean(group)))];
     const categories = [...new Set(allArticles.filter((article) => !group || article.categoryGroup === group).map((article) => article.category))];
+    const subgroups = [...new Set(allArticles.filter((article) => !group || article.categoryGroup === group).map((article) => article.categorySubgroup).filter((item): item is string => Boolean(item)))];
 
     return (
         <div className="space-y-10">
@@ -38,6 +40,11 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                     </Link>
                     {groups.map((item) => (
                         <Link key={item} href={`/articles?group=${encodeURIComponent(item)}`} className={`rounded-full px-4 py-2 text-sm font-semibold ${group === item && !category ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
+                            {item}
+                        </Link>
+                    ))}
+                    {subgroups.map((item) => (
+                        <Link key={item} href={`/articles?group=${encodeURIComponent(group ?? "")}&subgroup=${encodeURIComponent(item)}`} className={`rounded-full px-4 py-2 text-sm font-semibold ${subgroup === item ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
                             {item}
                         </Link>
                     ))}

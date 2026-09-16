@@ -15,7 +15,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
                 </div>
             )}
             <div className="p-5 sm:p-6">
-                <p className="text-xs font-semibold tracking-wide text-amber-700">{article.categoryGroup ? `${article.categoryGroup} / ${article.category}` : article.category}</p>
+                <p className="text-xs font-semibold tracking-wide text-amber-700">{article.categorySubgroup ? `${article.categoryGroup} / ${article.categorySubgroup}` : article.categoryGroup ? `${article.categoryGroup} / ${article.category}` : article.category}</p>
                 <h2 className="mt-2 font-serif text-xl font-bold leading-snug text-amber-950 group-hover:text-amber-700 sm:text-2xl">
                     <Link href={`/articles/${article.slug}`}>{article.title}</Link>
                 </h2>

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const categories = [
   { label: "ネットワーク", category: "ネットワーク", description: "つながる仕組みを、順番に理解する。" },
   { label: "クラウド / AWS", category: "クラウド / AWS", description: "雲の向こう側にあるサービスを知る。" },
-  { label: "サーバー", category: "サーバー", description: "サーバーを支える基本から始める。" },
+  { label: "サーバー", group: "サーバー", description: "サーバーを支える基本から始める。", children: ["Linux"] },
   { label: "応用情報（AP）", group: "応用情報（AP）", description: "試験に必要な知識を、分野ごとに整理する。", children: ["基礎理論"] },
 ];
 

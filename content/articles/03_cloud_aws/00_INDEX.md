@@ -4,14 +4,14 @@
 
 ## 記事一覧
 
-1. [クラウドとは？](01_cloud.md)
-2. [AWSとは？](02_aws.md)
-3. [Amazon EC2とは？](03_ec2.md)
-4. [Amazon S3とは？](04_s3.md)
-5. [Amazon VPCとは？](05_vpc.md)
-6. [Amazon RDSとは？](06_rds.md)
-7. [AWS Lambdaとは？](07_lambda.md)
-8. [Amazon CloudFrontとは？](08_cloudfront.md)
+1. [クラウドとは？](027_cloud.md)
+2. [AWSとは？](028_aws.md)
+3. [Amazon EC2とは？](029_ec2.md)
+4. [Amazon S3とは？](030_s3.md)
+5. [Amazon VPCとは？](031_vpc.md)
+6. [Amazon RDSとは？](032_rds.md)
+7. [AWS Lambdaとは？](033_lambda.md)
+8. [Amazon CloudFrontとは？](034_cloudfront.md)
 
 ## 学習順
 

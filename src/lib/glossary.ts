@@ -7,12 +7,32 @@ import type { GlossaryEntry, GlossaryFrontmatter } from "@/types/glossary";
 const glossaryDirectory = path.join(process.cwd(), "content/glossary");
 const supportedExtensions = new Set([".md", ".mdx"]);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const categoryGroups = new Map([["04_ap", "応用情報（AP）"]]);
+const categoryGroups = new Map([
+    ["02_server", "サーバー"],
+    ["04_ap", "応用情報（AP）"],
+]);
+
+const linuxGlossaryFiles = new Set([
+    "current-directory.md", "linux.md", "absolute-path.md", "linux-kernel.md", "linux-distribution.md",
+    "relative-path.md", "cli.md", "root-user.md", "root.md", "sudo.md", "user.md", "group.md",
+    "permission.md", "package-management.md", "chmod.md", "chown.md", "process.md", "pid.md",
+    "service.md", "systemd.md", "systemctl.md", "package.md", "package-manager.md", "repository.md",
+    "dependency.md", "ssh.md", "public-key-authentication.md", "grep.md", "pipe.md", "redirection.md",
+    "root-directory.md", "home-directory.md",
+]);
 
 function getCategoryGroup(filePath: string) {
     const relativePath = path.relative(glossaryDirectory, filePath);
     const groupDirectory = relativePath.split(path.sep)[0];
     return categoryGroups.get(groupDirectory);
+}
+
+function getCategorySubgroup(filePath: string) {
+    const fileName = path.basename(filePath).toLowerCase();
+    const normalizedFileName = fileName.replace(/^\d+_/, "");
+    return path.relative(glossaryDirectory, filePath).startsWith(`02_server${path.sep}`) && linuxGlossaryFiles.has(normalizedFileName)
+        ? "Linux"
+        : undefined;
 }
 
 function isIndexFile(filePath: string) {
@@ -155,7 +175,12 @@ function readEntry(filePath: string): GlossaryEntry {
     const source = fs.readFileSync(filePath, "utf8");
     const parsed = matter(source);
     validateFrontmatter(parsed.data, path.basename(filePath));
-    return { ...parsed.data, categoryGroup: getCategoryGroup(filePath), content: parsed.content };
+    return {
+        ...parsed.data,
+        categoryGroup: getCategoryGroup(filePath),
+        categorySubgroup: getCategorySubgroup(filePath),
+        content: parsed.content,
+    };
 }
 
 export function getAllGlossaryEntries() {

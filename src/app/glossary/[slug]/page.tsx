@@ -42,13 +42,13 @@ export default async function GlossaryDetailPage({ params }: GlossaryDetailProps
                 <Link href="/glossary" className="hover:text-amber-700">用語辞典</Link>
                 <span className="mx-2">&gt;</span>
                 {entry.categoryGroup && <><span>{entry.categoryGroup}</span><span className="mx-2">&gt;</span></>}
-                <span>{entry.category}</span>
+                <span>{entry.categorySubgroup ?? entry.category}</span>
                 <span className="mx-2">&gt;</span>
                 <span aria-current="page">{entry.term}</span>
             </nav>
 
             <header className="border-b border-amber-950/10 pb-8">
-                <p className="text-sm font-semibold text-amber-700">{entry.categoryGroup ? `${entry.categoryGroup} / ${entry.category}` : entry.category}</p>
+                <p className="text-sm font-semibold text-amber-700">{entry.categorySubgroup ? `${entry.categoryGroup} / ${entry.categorySubgroup}` : entry.categoryGroup ? `${entry.categoryGroup} / ${entry.category}` : entry.category}</p>
                 <h1 className="mt-3 font-serif text-4xl font-bold tracking-tight text-amber-950 sm:text-5xl">{entry.term}</h1>
                 {entry.reading && <p className="mt-3 text-sm text-amber-950/55">読み方：{entry.reading}</p>}
                 {entry.officialName && <p className="mt-2 text-sm text-amber-950/55">正式名称：{entry.officialName}</p>}
