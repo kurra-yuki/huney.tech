@@ -12,7 +12,7 @@ const errors = [];
 
 function isIndexFile(filePath) {
     const fileName = path.basename(filePath).toLowerCase();
-    return fileName === "00_index.md" || fileName === "index.md";
+    return fileName === "00_index.md" || fileName === "index.md" || /^99_.*\.md$/.test(fileName);
 }
 
 function getFilesRecursively(dir) {

@@ -14,6 +14,7 @@ const categories = [
   { label: "ネットワーク", description: "つながる仕組みを、順番に理解する。" },
   { label: "クラウド / AWS", description: "雲の向こう側にあるサービスを知る。" },
   { label: "サーバー", description: "サーバーを支える基本から始める。" },
+  { label: "基礎理論", description: "応用情報に必要な理論を、やさしくひとつずつつかむ。" },
 ];
 
 export default function Home() {

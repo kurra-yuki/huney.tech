@@ -8,7 +8,7 @@ const supportedExtensions = new Set([".md", ".mdx"]);
 
 function isIndexFile(filePath: string) {
     const fileName = path.basename(filePath).toLowerCase();
-    return fileName === "00_index.md" || fileName === "index.md";
+    return fileName === "00_index.md" || fileName === "index.md" || /^99_.*\.md$/.test(fileName);
 }
 
 function isValidFrontmatter(data: Record<string, unknown>): data is ArticleFrontmatter {
