@@ -16,7 +16,7 @@ export function Header() {
 
     return (
         <header className="border-b border-amber-950/10 bg-amber-50/95 backdrop-blur">
-            <div className="mx-auto flex min-h-16 max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+            <div className="mx-auto flex min-h-16 max-w-5xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
                 <Link href="/" className="group flex items-baseline gap-2" onClick={() => setIsMenuOpen(false)}>
                     <span className="font-serif text-2xl font-bold tracking-tight text-amber-950">Huney</span>
                     <span className="hidden text-xs text-amber-900/70 sm:inline">はちみつと学ぶIT</span>
@@ -27,7 +27,7 @@ export function Header() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className="rounded-full px-4 py-2 text-sm font-medium text-amber-950/75 transition-colors hover:bg-amber-100 hover:text-amber-950"
+                            className="rounded-lg px-3 py-2 text-sm font-medium text-amber-950/75 transition-colors hover:bg-amber-100 hover:text-amber-950"
                         >
                             {item.label}
                         </Link>
@@ -47,7 +47,7 @@ export function Header() {
 
             {isMenuOpen && (
                 <nav id="mobile-navigation" aria-label="モバイルナビゲーション" className="border-t border-amber-950/10 px-4 py-3 md:hidden">
-                    <div className="mx-auto grid max-w-6xl gap-1 sm:px-2">
+                    <div className="mx-auto grid max-w-5xl gap-1 sm:px-2">
                         {navigation.map((item) => (
                             <Link
                                 key={item.href}

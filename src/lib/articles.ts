@@ -5,6 +5,13 @@ import type { ArticleDetail, ArticleFrontmatter, ArticleSummary } from "@/types/
 
 const articlesDirectory = path.join(process.cwd(), "content/articles");
 const supportedExtensions = new Set([".md", ".mdx"]);
+const categoryGroups = new Map([["04_ap", "応用情報（AP）"]]);
+
+function getCategoryGroup(filePath: string) {
+    const relativePath = path.relative(articlesDirectory, filePath);
+    const groupDirectory = relativePath.split(path.sep)[0];
+    return categoryGroups.get(groupDirectory);
+}
 
 function isIndexFile(filePath: string) {
     const fileName = path.basename(filePath).toLowerCase();
@@ -88,6 +95,7 @@ export function getAllArticles(): ArticleSummary[] {
 
         return [{
             ...parsed.data,
+            categoryGroup: getCategoryGroup(filePath),
             readingTime: calculateReadingTime(parsed.content),
         }];
     });
@@ -169,6 +177,7 @@ export function getArticleBySlug(slug: string): ArticleDetail | null {
 
     return {
         ...parsed.data,
+        categoryGroup: getCategoryGroup(filePath),
         content: parsed.content,
         readingTime: calculateReadingTime(parsed.content),
     };

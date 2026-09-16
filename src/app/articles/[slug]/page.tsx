@@ -54,13 +54,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 <span className="mx-2">&gt;</span>
                 <Link href="/articles" className="hover:text-amber-700">記事</Link>
                 <span className="mx-2">&gt;</span>
+                {article.categoryGroup && <><span>{article.categoryGroup}</span><span className="mx-2">&gt;</span></>}
                 <span>{article.category}</span>
                 <span className="mx-2">&gt;</span>
                 <span aria-current="page">{article.title}</span>
             </nav>
 
             <header>
-                <p className="text-sm font-semibold text-amber-700">{article.category}</p>
+                <p className="text-sm font-semibold text-amber-700">{article.categoryGroup ? `${article.categoryGroup} / ${article.category}` : article.category}</p>
                 <h1 className="mt-3 font-serif text-4xl font-bold leading-tight tracking-tight text-amber-950 sm:text-5xl">{article.title}</h1>
                 <p className="mt-5 text-lg leading-8 text-amber-950/65">{article.description}</p>
                 <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-amber-950/55">

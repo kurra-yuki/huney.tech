@@ -6,6 +6,8 @@
 
 body {
     margin: 0;
+    background: rgb(255 251 235);
+    color: rgb(69 45 20);
 }
 
 button,
@@ -14,9 +16,10 @@ a {
 }
 
 .article-content {
+    max-width: 42rem;
     color: rgb(69 45 20 / 0.8);
-    font-size: 1.05rem;
-    line-height: 2;
+    font-size: 1rem;
+    line-height: 1.9;
 }
 
 .article-content h2,
@@ -30,7 +33,7 @@ a {
 .article-content h2 {
     border-left: 4px solid rgb(245 158 11);
     font-size: 1.75rem;
-    margin: 3rem 0 1rem;
+    margin: 2.75rem 0 1rem;
     padding-left: 1rem;
 }
 
@@ -44,7 +47,7 @@ a {
 .article-content ol,
 .article-content blockquote,
 .article-content pre {
-    margin: 1rem 0;
+    margin: 0.9rem 0;
 }
 
 .article-content ul,

@@ -11,16 +11,18 @@ export const metadata: Metadata = {
 };
 
 const categories = [
-  { label: "ネットワーク", description: "つながる仕組みを、順番に理解する。" },
-  { label: "クラウド / AWS", description: "雲の向こう側にあるサービスを知る。" },
-  { label: "サーバー", description: "サーバーを支える基本から始める。" },
-  { label: "基礎理論", description: "応用情報に必要な理論を、やさしくひとつずつつかむ。" },
+  { label: "ネットワーク", category: "ネットワーク", description: "つながる仕組みを、順番に理解する。" },
+  { label: "クラウド / AWS", category: "クラウド / AWS", description: "雲の向こう側にあるサービスを知る。" },
+  { label: "サーバー", category: "サーバー", description: "サーバーを支える基本から始める。" },
+  { label: "応用情報（AP）", group: "応用情報（AP）", description: "試験に必要な知識を、分野ごとに整理する。", children: ["基礎理論"] },
 ];
 
 export default function Home() {
   const latestArticles = getLatestArticles(3);
-  const availableCategories = new Set(getAllArticles().map((article) => article.category));
-  const visibleCategories = categories.filter((category) => availableCategories.has(category.label));
+  const articles = getAllArticles();
+  const visibleCategories = categories.filter((category) => category.group
+    ? articles.some((article) => article.categoryGroup === category.group)
+    : articles.some((article) => article.category === category.category));
 
   return (
     <div className="space-y-20">

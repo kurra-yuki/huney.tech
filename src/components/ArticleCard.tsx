@@ -14,13 +14,13 @@ export function ArticleCard({ article }: ArticleCardProps) {
                     <Image src={article.thumbnail} alt="" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
                 </div>
             )}
-            <div className="p-6">
-                <p className="text-sm font-semibold text-amber-700">{article.category}</p>
-                <h2 className="mt-2 font-serif text-2xl font-bold leading-tight text-amber-950 group-hover:text-amber-700">
+            <div className="p-5 sm:p-6">
+                <p className="text-xs font-semibold tracking-wide text-amber-700">{article.categoryGroup ? `${article.categoryGroup} / ${article.category}` : article.category}</p>
+                <h2 className="mt-2 font-serif text-xl font-bold leading-snug text-amber-950 group-hover:text-amber-700 sm:text-2xl">
                     <Link href={`/articles/${article.slug}`}>{article.title}</Link>
                 </h2>
-                <p className="mt-3 line-clamp-3 text-sm leading-7 text-amber-950/65">{article.description}</p>
-                <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-xs text-amber-950/55">
+                <p className="mt-3 line-clamp-3 text-sm leading-6 text-amber-950/65">{article.description}</p>
+                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-amber-950/55">
                     <time dateTime={article.publishedAt}>{article.publishedAt}</time>
                     <span>約{article.readingTime}分</span>
                 </div>

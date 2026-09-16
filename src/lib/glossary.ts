@@ -7,6 +7,13 @@ import type { GlossaryEntry, GlossaryFrontmatter } from "@/types/glossary";
 const glossaryDirectory = path.join(process.cwd(), "content/glossary");
 const supportedExtensions = new Set([".md", ".mdx"]);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const categoryGroups = new Map([["04_ap", "応用情報（AP）"]]);
+
+function getCategoryGroup(filePath: string) {
+    const relativePath = path.relative(glossaryDirectory, filePath);
+    const groupDirectory = relativePath.split(path.sep)[0];
+    return categoryGroups.get(groupDirectory);
+}
 
 function isIndexFile(filePath: string) {
     const fileName = path.basename(filePath).toLowerCase();
@@ -148,7 +155,7 @@ function readEntry(filePath: string): GlossaryEntry {
     const source = fs.readFileSync(filePath, "utf8");
     const parsed = matter(source);
     validateFrontmatter(parsed.data, path.basename(filePath));
-    return { ...parsed.data, content: parsed.content };
+    return { ...parsed.data, categoryGroup: getCategoryGroup(filePath), content: parsed.content };
 }
 
 export function getAllGlossaryEntries() {

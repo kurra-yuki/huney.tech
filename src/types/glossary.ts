@@ -2,6 +2,7 @@ export type GlossaryFrontmatter = {
     term: string;
     slug: string;
     summary: string;
+    categoryGroup?: string;
     reading?: string;
     officialName?: string;
     category: string;

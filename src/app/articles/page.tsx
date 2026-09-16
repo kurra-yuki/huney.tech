@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleCard } from "@/components/ArticleCard";
-import { getAllArticles, getArticlesByCategory } from "@/lib/articles";
+import { getAllArticles } from "@/lib/articles";
 
 export const metadata: Metadata = {
     title: "記事一覧",
@@ -10,13 +10,18 @@ export const metadata: Metadata = {
 };
 
 type ArticlesPageProps = {
-    searchParams: Promise<{ category?: string }>;
+    searchParams: Promise<{ category?: string; group?: string }>;
 };
 
 export default async function ArticlesPage({ searchParams }: ArticlesPageProps) {
-    const { category } = await searchParams;
-    const articles = category ? getArticlesByCategory(category) : getAllArticles();
-    const categories = [...new Set(getAllArticles().map((article) => article.category))];
+    const { category, group } = await searchParams;
+    const allArticles = getAllArticles();
+    const articles = allArticles.filter((article) => {
+        if (group && article.categoryGroup !== group) return false;
+        return !category || article.category === category;
+    });
+    const groups = [...new Set(allArticles.map((article) => article.categoryGroup).filter((group): group is string => Boolean(group)))];
+    const categories = [...new Set(allArticles.filter((article) => !group || article.categoryGroup === group).map((article) => article.category))];
 
     return (
         <div className="space-y-10">
@@ -28,11 +33,16 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
 
             {categories.length > 0 && (
                 <nav aria-label="記事カテゴリ" className="flex flex-wrap gap-2">
-                    <Link href="/articles" className={`rounded-full px-4 py-2 text-sm font-semibold ${!category ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
+                    <Link href={group ? `/articles?group=${encodeURIComponent(group)}` : "/articles"} className={`rounded-full px-4 py-2 text-sm font-semibold ${!category ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
                         すべて
                     </Link>
+                    {groups.map((item) => (
+                        <Link key={item} href={`/articles?group=${encodeURIComponent(item)}`} className={`rounded-full px-4 py-2 text-sm font-semibold ${group === item && !category ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
+                            {item}
+                        </Link>
+                    ))}
                     {categories.map((item) => (
-                        <Link key={item} href={`/articles?category=${encodeURIComponent(item)}`} className={`rounded-full px-4 py-2 text-sm font-semibold ${category === item ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
+                        <Link key={item} href={`/articles?${group ? `group=${encodeURIComponent(group)}&` : ""}category=${encodeURIComponent(item)}`} className={`rounded-full px-4 py-2 text-sm font-semibold ${category === item ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
                             {item}
                         </Link>
                     ))}
