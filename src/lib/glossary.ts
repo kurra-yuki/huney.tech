@@ -10,6 +10,7 @@ const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const categoryGroups = new Map([
     ["02_server", "サーバー"],
     ["04_ap", "応用情報（AP）"],
+    ["05_nutanix", "Nutanix"],
 ]);
 
 const linuxGlossaryFiles = new Set([
@@ -27,17 +28,42 @@ function getCategoryGroup(filePath: string) {
     return categoryGroups.get(groupDirectory);
 }
 
+function getContentOrder(filePath: string) {
+    const match = path.basename(filePath).match(/^(\d+)_/);
+    return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+}
+
 function getCategorySubgroup(filePath: string) {
     const fileName = path.basename(filePath).toLowerCase();
     const normalizedFileName = fileName.replace(/^\d+_/, "");
-    return path.relative(glossaryDirectory, filePath).startsWith(`02_server${path.sep}`) && linuxGlossaryFiles.has(normalizedFileName)
-        ? "Linux"
-        : undefined;
+    const relativePath = path.relative(glossaryDirectory, filePath);
+    const order = getContentOrder(filePath);
+
+    if (relativePath.startsWith(`02_server${path.sep}`) && linuxGlossaryFiles.has(normalizedFileName)) return "Linux";
+    if (relativePath.startsWith(`04_ap${path.sep}`)) {
+        if (order <= 130) return "集合と論理";
+        if (order <= 143) return "情報量と符号化";
+        if (order <= 160) return "オートマトンと形式言語";
+        if (order <= 176) return "グラフ理論";
+        if (order <= 204) return "確率・統計・回帰分析";
+        if (order <= 223) return "数値計算と線形代数";
+        return "AI・機械学習";
+    }
+    if (relativePath.startsWith(`05_nutanix${path.sep}`)) {
+        if (order <= 264) return "基礎・アーキテクチャ";
+        if (order <= 278) return "AHV・VM・ネットワーク";
+        if (order <= 283) return "ストレージ・耐障害性";
+        if (order <= 296) return "運用・監視";
+        if (order <= 304) return "Volumes";
+        return "サポート";
+    }
+
+    return undefined;
 }
 
 function isIndexFile(filePath: string) {
     const fileName = path.basename(filePath).toLowerCase();
-    return fileName === "00_index.md" || fileName === "index.md" || /^99_.*\.md$/.test(fileName);
+    return fileName === "00_index.md" || fileName === "index.md" || fileName === "readme.md" || /^99_.*\.md$/.test(fileName);
 }
 
 function validateFrontmatter(data: Record<string, unknown>, fileName: string): asserts data is GlossaryFrontmatter {
@@ -179,6 +205,7 @@ function readEntry(filePath: string): GlossaryEntry {
         ...parsed.data,
         categoryGroup: getCategoryGroup(filePath),
         categorySubgroup: getCategorySubgroup(filePath),
+        contentOrder: getContentOrder(filePath),
         content: parsed.content,
     };
 }

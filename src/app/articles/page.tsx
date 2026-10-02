@@ -13,17 +13,45 @@ type ArticlesPageProps = {
     searchParams: Promise<{ category?: string; group?: string; subgroup?: string }>;
 };
 
+type ArticleFilters = {
+    category?: string;
+    group?: string;
+    subgroup?: string;
+};
+
+function getArticleHref(filters: ArticleFilters) {
+    const params = new URLSearchParams();
+    if (filters.group) params.set("group", filters.group);
+    if (filters.subgroup) params.set("subgroup", filters.subgroup);
+    if (filters.category) params.set("category", filters.category);
+    const query = params.toString();
+    return query ? `/articles?${query}` : "/articles";
+}
+
 export default async function ArticlesPage({ searchParams }: ArticlesPageProps) {
     const { category, group, subgroup } = await searchParams;
     const allArticles = getAllArticles();
+    const groups = [...new Set(allArticles.map((article) => article.categoryGroup).filter((item): item is string => Boolean(item)))].sort((a, b) => a.localeCompare(b, "ja"));
+    const groupArticles = allArticles
+        .filter((article) => article.categoryGroup === group)
+        .sort((a, b) => a.contentOrder - b.contentOrder);
+    const subgroups = group
+        ? [...new Set(groupArticles.map((article) => article.categorySubgroup).filter((item): item is string => Boolean(item)))]
+        : [];
+    const categoryScope = allArticles.filter((article) => {
+        if (group ? article.categoryGroup !== group : article.categoryGroup) return false;
+        return !subgroup || article.categorySubgroup === subgroup;
+    });
+    const categories = [...new Set(categoryScope.map((article) => article.category))]
+        .filter((item) => item !== group && !subgroups.includes(item))
+        .sort((a, b) => a.localeCompare(b, "ja"));
     const articles = allArticles.filter((article) => {
         if (group && article.categoryGroup !== group) return false;
         if (subgroup && article.categorySubgroup !== subgroup) return false;
         return !category || article.category === category;
     });
-    const groups = [...new Set(allArticles.map((article) => article.categoryGroup).filter((group): group is string => Boolean(group)))];
-    const categories = [...new Set(allArticles.filter((article) => !group || article.categoryGroup === group).map((article) => article.category))];
-    const subgroups = [...new Set(allArticles.filter((article) => !group || article.categoryGroup === group).map((article) => article.categorySubgroup).filter((item): item is string => Boolean(item)))];
+    const usesLearningOrder = group === "応用情報（AP）" || group === "Nutanix";
+    if (usesLearningOrder) articles.sort((a, b) => a.contentOrder - b.contentOrder);
 
     return (
         <div className="space-y-10">
@@ -33,28 +61,39 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                 <p className="mt-5 leading-8 text-amber-950/65">ITの仕組みを、初心者にも読みやすい言葉で整理しています。</p>
             </header>
 
-            {categories.length > 0 && (
-                <nav aria-label="記事カテゴリ" className="flex flex-wrap gap-2">
-                    <Link href={group ? `/articles?group=${encodeURIComponent(group)}` : "/articles"} className={`rounded-full px-4 py-2 text-sm font-semibold ${!category ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
-                        すべて
-                    </Link>
+            <nav aria-label="記事カテゴリ" className="space-y-3">
+                <div className="flex flex-wrap items-center gap-2">
+                    <span className="mr-1 text-sm font-semibold text-amber-950/60">分野</span>
+                    <Link href={getArticleHref({})} aria-current={!group && !category ? "page" : undefined} className={`rounded-full px-4 py-2 text-sm font-semibold ${!group && !category ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>すべて</Link>
                     {groups.map((item) => (
-                        <Link key={item} href={`/articles?group=${encodeURIComponent(item)}`} className={`rounded-full px-4 py-2 text-sm font-semibold ${group === item && !category ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
+                        <Link key={item} href={getArticleHref({ group: item })} aria-current={group === item && !subgroup && !category ? "page" : undefined} className={`rounded-full px-4 py-2 text-sm font-semibold ${group === item && !subgroup && !category ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
                             {item}
                         </Link>
                     ))}
-                    {subgroups.map((item) => (
-                        <Link key={item} href={`/articles?group=${encodeURIComponent(group ?? "")}&subgroup=${encodeURIComponent(item)}`} className={`rounded-full px-4 py-2 text-sm font-semibold ${subgroup === item ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
-                            {item}
-                        </Link>
-                    ))}
-                    {categories.map((item) => (
-                        <Link key={item} href={`/articles?${group ? `group=${encodeURIComponent(group)}&` : ""}category=${encodeURIComponent(item)}`} className={`rounded-full px-4 py-2 text-sm font-semibold ${category === item ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
-                            {item}
-                        </Link>
-                    ))}
-                </nav>
-            )}
+                </div>
+                {group && subgroups.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-2">
+                        <span className="mr-1 text-sm font-semibold text-amber-950/60">学習テーマ</span>
+                        {subgroups.map((item) => (
+                            <Link key={item} href={getArticleHref({ group, subgroup: item })} aria-current={subgroup === item ? "page" : undefined} className={`rounded-full px-4 py-2 text-sm font-semibold ${subgroup === item ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
+                                {item}
+                            </Link>
+                        ))}
+                    </div>
+                )}
+                {categories.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-2">
+                        <span className="mr-1 text-sm font-semibold text-amber-950/60">カテゴリ</span>
+                        {categories.map((item) => (
+                            <Link key={item} href={getArticleHref({ group, subgroup, category: item })} aria-current={category === item ? "page" : undefined} className={`rounded-full px-4 py-2 text-sm font-semibold ${category === item ? "bg-amber-950 text-amber-50" : "bg-white text-amber-950/70 hover:bg-amber-100"}`}>
+                                {item}
+                            </Link>
+                        ))}
+                    </div>
+                )}
+            </nav>
+
+            {usesLearningOrder && <p className="-mb-6 text-sm text-amber-950/55">学習順</p>}
 
             {articles.length > 0 ? (
                 <section aria-label="記事一覧" className="grid gap-6 md:grid-cols-2">
@@ -66,7 +105,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                     <p className="mt-3 text-sm leading-7 text-amber-950/60">
                         {category ? `「${category}」の記事はまだ公開されていません。` : "公開された記事は、ここに新しい順で表示されます。"}
                     </p>
-                    {category && <Link href="/articles" className="mt-6 inline-block text-sm font-semibold text-amber-700 hover:text-amber-950">すべての記事を見る</Link>}
+                    {(category || group || subgroup) && <Link href={getArticleHref({})} className="mt-6 inline-block text-sm font-semibold text-amber-700 hover:text-amber-950">すべての記事を見る</Link>}
                 </section>
             )}
         </div>

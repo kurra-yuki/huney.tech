@@ -15,4 +15,5 @@ export type GlossaryFrontmatter = {
 
 export type GlossaryEntry = GlossaryFrontmatter & {
     content: string;
+    contentOrder: number;
 };

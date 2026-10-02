@@ -19,6 +19,7 @@ export type ArticleFrontmatter = {
 
 export type ArticleSummary = ArticleFrontmatter & {
     readingTime: number;
+    contentOrder: number;
 };
 
 export type ArticleDetail = ArticleSummary & {

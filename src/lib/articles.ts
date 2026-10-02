@@ -8,6 +8,7 @@ const supportedExtensions = new Set([".md", ".mdx"]);
 const categoryGroups = new Map([
     ["02_server", "サーバー"],
     ["04_ap", "応用情報（AP）"],
+    ["05_nutanix", "Nutanix"],
 ]);
 
 function getCategoryGroup(filePath: string) {
@@ -16,11 +17,29 @@ function getCategoryGroup(filePath: string) {
     return categoryGroups.get(groupDirectory);
 }
 
+function getContentOrder(filePath: string) {
+    const match = path.basename(filePath).match(/^(\d+)_/);
+    return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+}
+
 function getCategorySubgroup(filePath: string) {
     const fileName = path.basename(filePath).toLowerCase();
-    return path.relative(articlesDirectory, filePath).startsWith(`02_server${path.sep}`) && /^\d+_linux/.test(fileName)
-        ? "Linux"
-        : undefined;
+    const relativePath = path.relative(articlesDirectory, filePath);
+
+    if (relativePath.startsWith(`02_server${path.sep}`) && /^\d+_linux/.test(fileName)) return "Linux";
+    if (relativePath.startsWith(`04_ap${path.sep}`)) {
+        const subgroupDirectory = relativePath.split(path.sep)[1];
+        if (subgroupDirectory === "01_foundation") return "基礎理論";
+        if (subgroupDirectory === "02_algorithm") return "アルゴリズムとプログラミング";
+    }
+    if (relativePath.startsWith(`05_nutanix${path.sep}`)) {
+        const order = getContentOrder(filePath);
+        if (order <= 55) return "基礎とプラットフォーム";
+        if (order <= 58) return "ネットワーク・ストレージ";
+        return "運用・試験対策";
+    }
+
+    return undefined;
 }
 
 function isIndexFile(filePath: string) {
@@ -108,6 +127,7 @@ export function getAllArticles(): ArticleSummary[] {
             categoryGroup: getCategoryGroup(filePath),
             categorySubgroup: getCategorySubgroup(filePath),
             readingTime: calculateReadingTime(parsed.content),
+            contentOrder: getContentOrder(filePath),
         }];
     });
 
@@ -192,5 +212,6 @@ export function getArticleBySlug(slug: string): ArticleDetail | null {
         categorySubgroup: getCategorySubgroup(filePath),
         content: parsed.content,
         readingTime: calculateReadingTime(parsed.content),
+        contentOrder: getContentOrder(filePath),
     };
 }
