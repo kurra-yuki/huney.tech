@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleCard } from "@/components/ArticleCard";
+import { Pagination } from "@/components/Pagination";
 import { getAllArticles } from "@/lib/articles";
 
 export const metadata: Metadata = {
@@ -10,13 +11,14 @@ export const metadata: Metadata = {
 };
 
 type ArticlesPageProps = {
-    searchParams: Promise<{ category?: string; group?: string; subgroup?: string }>;
+    searchParams: Promise<{ category?: string; group?: string; subgroup?: string; page?: string | string[] }>;
 };
 
 type ArticleFilters = {
     category?: string;
     group?: string;
     subgroup?: string;
+    page?: number;
 };
 
 function getArticleHref(filters: ArticleFilters) {
@@ -24,12 +26,20 @@ function getArticleHref(filters: ArticleFilters) {
     if (filters.group) params.set("group", filters.group);
     if (filters.subgroup) params.set("subgroup", filters.subgroup);
     if (filters.category) params.set("category", filters.category);
+    if (filters.page && filters.page > 1) params.set("page", String(filters.page));
     const query = params.toString();
     return query ? `/articles?${query}` : "/articles";
 }
 
+function parsePage(value?: string | string[]) {
+    const page = Number.parseInt(Array.isArray(value) ? value[0] ?? "1" : value ?? "1", 10);
+    return Number.isInteger(page) && page > 0 ? page : 1;
+}
+
+const PAGE_SIZE = 12;
+
 export default async function ArticlesPage({ searchParams }: ArticlesPageProps) {
-    const { category, group, subgroup } = await searchParams;
+    const { category, group, subgroup, page: pageParam } = await searchParams;
     const allArticles = getAllArticles();
     const groups = [...new Set(allArticles.map((article) => article.categoryGroup).filter((item): item is string => Boolean(item)))].sort((a, b) => a.localeCompare(b, "ja"));
     const groupArticles = allArticles
@@ -52,6 +62,9 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
     });
     const usesLearningOrder = group === "応用情報（AP）" || group === "Nutanix";
     if (usesLearningOrder) articles.sort((a, b) => a.contentOrder - b.contentOrder);
+    const totalPages = Math.max(1, Math.ceil(articles.length / PAGE_SIZE));
+    const currentPage = Math.min(parsePage(pageParam), totalPages);
+    const pageArticles = articles.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
     return (
         <div className="space-y-10">
@@ -97,7 +110,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
 
             {articles.length > 0 ? (
                 <section aria-label="記事一覧" className="grid gap-6 md:grid-cols-2">
-                    {articles.map((article) => <ArticleCard key={article.slug} article={article} />)}
+                    {pageArticles.map((article) => <ArticleCard key={article.slug} article={article} />)}
                 </section>
             ) : (
                 <section className="rounded-2xl border border-dashed border-amber-950/20 bg-white/55 px-6 py-14 text-center">
@@ -108,6 +121,13 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                     {(category || group || subgroup) && <Link href={getArticleHref({})} className="mt-6 inline-block text-sm font-semibold text-amber-700 hover:text-amber-950">すべての記事を見る</Link>}
                 </section>
             )}
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                totalItems={articles.length}
+                pageSize={PAGE_SIZE}
+                hrefForPage={(nextPage) => getArticleHref({ category, group, subgroup, page: nextPage })}
+            />
         </div>
     );
 }

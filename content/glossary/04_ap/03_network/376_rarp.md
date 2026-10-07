@@ -1,0 +1,44 @@
+---
+title: RARP
+slug: rarp
+category: ネットワーク
+type: glossary
+draft: false
+term: RARP
+summary: >-
+  RARPとは、MACアドレスからIPアドレスを調べる古い仕組みです。
+---
+
+# RARP
+
+## 正式名称
+
+**Reverse Address Resolution Protocol**
+
+## 一言でいうと
+
+**MACアドレスからIPアドレスを調べる古い仕組み**
+
+## 初心者向け説明
+
+RARPは、MACアドレスからIPアドレスを調べる古い仕組みです。ネットワークの仕組みを理解するときは、「何をするための技術・用語なのか」を押さえると整理しやすくなります。
+
+## ポイント
+
+- MACアドレスからIPアドレスを調べる古い仕組み
+- 「データリンク層の制御とプロトコル」の内容と関連する
+- 似た用語と役割の違いをセットで覚えると理解しやすい
+
+## 関連用語
+
+- [メディアアクセス制御](/glossary/media-access-control)
+- [CSMA/CD](/glossary/csma-cd)
+- [トークンパッシング](/glossary/token-passing)
+
+## 関連記事
+
+- データリンク層の制御とプロトコル
+
+## 🍯 はちみつメモ
+
+> **RARP = MACアドレスからIPアドレスを調べる古い仕組み**

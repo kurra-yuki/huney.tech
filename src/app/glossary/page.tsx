@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GlossaryCard } from "@/components/GlossaryCard";
+import { Pagination } from "@/components/Pagination";
 import { getAllGlossaryEntries } from "@/lib/glossary";
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 type GlossaryPageProps = {
-    searchParams: Promise<{ q?: string; group?: string; subgroup?: string; category?: string }>;
+    searchParams: Promise<{ q?: string; group?: string; subgroup?: string; category?: string; page?: string | string[] }>;
 };
 
 type GlossaryFilters = {
@@ -18,6 +19,7 @@ type GlossaryFilters = {
     group?: string;
     subgroup?: string;
     category?: string;
+    page?: number;
 };
 
 function getGlossaryHref(filters: GlossaryFilters) {
@@ -26,12 +28,20 @@ function getGlossaryHref(filters: GlossaryFilters) {
     if (filters.group) params.set("group", filters.group);
     if (filters.subgroup) params.set("subgroup", filters.subgroup);
     if (filters.category) params.set("category", filters.category);
+    if (filters.page && filters.page > 1) params.set("page", String(filters.page));
     const query = params.toString();
     return query ? `/glossary?${query}` : "/glossary";
 }
 
+function parsePage(value?: string | string[]) {
+    const page = Number.parseInt(Array.isArray(value) ? value[0] ?? "1" : value ?? "1", 10);
+    return Number.isInteger(page) && page > 0 ? page : 1;
+}
+
+const PAGE_SIZE = 12;
+
 export default async function GlossaryPage({ searchParams }: GlossaryPageProps) {
-    const { q, group, subgroup, category } = await searchParams;
+    const { q, group, subgroup, category, page: pageParam } = await searchParams;
     const query = q?.trim().toLocaleLowerCase("ja-JP") ?? "";
     const allEntries = getAllGlossaryEntries();
     const groups = [...new Set(allEntries.map((entry) => entry.categoryGroup).filter((item): item is string => Boolean(item)))].sort((a, b) => a.localeCompare(b, "ja"));
@@ -57,6 +67,9 @@ export default async function GlossaryPage({ searchParams }: GlossaryPageProps) 
     if (group === "応用情報（AP）" || group === "Nutanix") {
         entries.sort((a, b) => a.contentOrder - b.contentOrder);
     }
+    const totalPages = Math.max(1, Math.ceil(entries.length / PAGE_SIZE));
+    const currentPage = Math.min(parsePage(pageParam), totalPages);
+    const pageEntries = entries.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
     return (
         <div className="space-y-10">
@@ -111,7 +124,7 @@ export default async function GlossaryPage({ searchParams }: GlossaryPageProps) 
 
             {entries.length > 0 ? (
                 <section aria-label="用語一覧" className="grid gap-6 md:grid-cols-2">
-                    {entries.map((entry) => <GlossaryCard key={entry.slug} entry={entry} />)}
+                    {pageEntries.map((entry) => <GlossaryCard key={entry.slug} entry={entry} />)}
                 </section>
             ) : (
                 <section className="rounded-2xl border border-dashed border-amber-950/20 bg-white/55 px-6 py-14 text-center">
@@ -120,6 +133,13 @@ export default async function GlossaryPage({ searchParams }: GlossaryPageProps) 
                     {query && <Link href="/glossary" className="mt-6 inline-block text-sm font-semibold text-amber-700 hover:text-amber-950">すべての用語を見る</Link>}
                 </section>
             )}
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                totalItems={entries.length}
+                pageSize={PAGE_SIZE}
+                hrefForPage={(nextPage) => getGlossaryHref({ q, group, subgroup, category, page: nextPage })}
+            />
         </div>
     );
 }

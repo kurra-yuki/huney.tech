@@ -41,6 +41,11 @@ function getCategorySubgroup(filePath: string) {
 
     if (relativePath.startsWith(`02_server${path.sep}`) && linuxGlossaryFiles.has(normalizedFileName)) return "Linux";
     if (relativePath.startsWith(`04_ap${path.sep}`)) {
+        const subgroupDirectory = relativePath.split(path.sep)[1];
+        if (subgroupDirectory === "02_algorithm") return "アルゴリズムとプログラミング";
+        if (subgroupDirectory === "03_network") return "ネットワーク";
+        if (subgroupDirectory === "04_software") return "ソフトウェア";
+        if (subgroupDirectory === "05_hardware") return "ハードウェア";
         if (order <= 130) return "集合と論理";
         if (order <= 143) return "情報量と符号化";
         if (order <= 160) return "オートマトンと形式言語";
@@ -50,11 +55,11 @@ function getCategorySubgroup(filePath: string) {
         return "AI・機械学習";
     }
     if (relativePath.startsWith(`05_nutanix${path.sep}`)) {
-        if (order <= 264) return "基礎・アーキテクチャ";
-        if (order <= 278) return "AHV・VM・ネットワーク";
-        if (order <= 283) return "ストレージ・耐障害性";
-        if (order <= 296) return "運用・監視";
-        if (order <= 304) return "Volumes";
+        if (order <= 713) return "基礎・アーキテクチャ";
+        if (order <= 727) return "AHV・VM・ネットワーク";
+        if (order <= 732) return "ストレージ・耐障害性";
+        if (order <= 745) return "運用・監視";
+        if (order <= 753) return "Volumes";
         return "サポート";
     }
 

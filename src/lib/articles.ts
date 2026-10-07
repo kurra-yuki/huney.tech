@@ -31,11 +31,17 @@ function getCategorySubgroup(filePath: string) {
         const subgroupDirectory = relativePath.split(path.sep)[1];
         if (subgroupDirectory === "01_foundation") return "基礎理論";
         if (subgroupDirectory === "02_algorithm") return "アルゴリズムとプログラミング";
+        if (subgroupDirectory === "03_network") return "ネットワーク";
+        if (subgroupDirectory === "04_software") return "ソフトウェア";
+        if (subgroupDirectory === "05_hardware") return "ハードウェア";
+        if (subgroupDirectory === "03_network") return "ネットワーク";
+        if (subgroupDirectory === "04_software") return "ソフトウェア";
+        if (subgroupDirectory === "05_hardware") return "ハードウェア";
     }
     if (relativePath.startsWith(`05_nutanix${path.sep}`)) {
         const order = getContentOrder(filePath);
-        if (order <= 55) return "基礎とプラットフォーム";
-        if (order <= 58) return "ネットワーク・ストレージ";
+        if (order <= 75) return "基礎とプラットフォーム";
+        if (order <= 78) return "ネットワーク・ストレージ";
         return "運用・試験対策";
     }
 

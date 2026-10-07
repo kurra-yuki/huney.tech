@@ -158,10 +158,17 @@
 - [生成AI](01_foundation/252_generative-ai.md)
 - [プロンプトエンジニアリング](01_foundation/253_prompt-engineering.md)
 
-**収録数：136語（公開135語、下書き1語）**
+**収録数：585語（公開584語、下書き1語）**
 
 ## 下書き
 
 - [正規表現（下書き）](01_foundation/156_regular-expression.md)
 
 下書きは公開一覧に含まれません。
+
+## 追加分野の用語INDEX
+
+- [アルゴリズムとプログラミング（95語）](02_algorithm/00_INDEX.md)
+- [ネットワーク（124語）](03_network/00_INDEX.md)
+- [ソフトウェア（136語）](04_software/00_INDEX.md)
+- [ハードウェア（94語）](05_hardware/00_INDEX.md)
