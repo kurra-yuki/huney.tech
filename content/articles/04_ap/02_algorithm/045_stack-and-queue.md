@@ -13,7 +13,7 @@ tags:
   - "データ構造"
   - "アルゴリズム"
   - "応用情報技術者試験"
-draft: true
+draft: false
 ---
 
 # スタックとキューとは？LIFO・FIFO・PUSH・POPを基礎から理解しよう

@@ -14,7 +14,7 @@ tags:
   - "Subversion"
   - "バージョン管理"
   - "応用情報技術者試験"
-draft: true
+draft: false
 ---
 
 # 開発ツールとは？テスト支援・IDE・Git・バージョン管理を基礎から理解しよう

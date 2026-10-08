@@ -15,7 +15,7 @@ tags:
   - "HDLC"
   - "FCS"
   - "応用情報技術者試験"
-draft: true
+draft: false
 ---
 
 # 伝送技術とは？誤り制御・同期制御・HDLCを基礎から理解しよう

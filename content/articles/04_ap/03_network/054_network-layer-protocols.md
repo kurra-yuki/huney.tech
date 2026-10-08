@@ -16,7 +16,7 @@ tags:
   - "NAPT"
   - "ICMP"
   - "応用情報技術者試験"
-draft: true
+draft: false
 ---
 
 # ネットワーク層のプロトコルと技術｜IP・サブネット・CIDR・IPv6・ICMPを理解しよう

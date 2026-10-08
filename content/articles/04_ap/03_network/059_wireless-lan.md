@@ -15,7 +15,7 @@ tags:
   - "RTS/CTS"
   - "チャネル"
   - "応用情報技術者試験"
-draft: true
+draft: false
 ---
 
 # 無線LANとは？IEEE 802.11・CSMA/CA・RTS/CTS・チャネルを基礎から理解しよう

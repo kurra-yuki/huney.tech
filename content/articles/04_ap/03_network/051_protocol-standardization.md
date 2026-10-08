@@ -13,7 +13,7 @@ tags:
   - "TCP/IP"
   - "IEEE"
   - "応用情報技術者試験"
-draft: true
+draft: false
 ---
 
 # 通信プロトコルの標準化とは？OSI基本参照モデルとTCP/IPを基礎から理解しよう

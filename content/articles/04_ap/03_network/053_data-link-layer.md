@@ -15,7 +15,7 @@ tags:
   - "PPPoE"
   - "IEEE 802.3"
   - "応用情報技術者試験"
-draft: true
+draft: false
 ---
 
 # データリンク層の制御とプロトコルとは？CSMA/CD・ARP・PPPを基礎から理解しよう

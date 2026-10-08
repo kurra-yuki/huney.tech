@@ -14,7 +14,7 @@ tags:
   - "PCI Express"
   - "SATA"
   - "応用情報技術者試験"
-draft: true
+draft: false
 ---
 
 # 入出力アーキテクチャとは？DMA・チャネル制御・USBなどのインターフェースを理解しよう

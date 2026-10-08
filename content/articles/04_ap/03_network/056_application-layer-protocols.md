@@ -17,7 +17,7 @@ tags:
   - "VoIP"
   - "SIP"
   - "応用情報技術者試験"
-draft: true
+draft: false
 ---
 
 # アプリケーション層のプロトコル｜メール・HTTP・DNS・SNMP・VoIPをまとめて理解しよう
