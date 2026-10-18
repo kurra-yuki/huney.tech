@@ -158,7 +158,7 @@
 - [生成AI](01_foundation/252_generative-ai.md)
 - [プロンプトエンジニアリング](01_foundation/253_prompt-engineering.md)
 
-**収録数：585語（公開584語、下書き1語）**
+**収録数：1,116語（公開1,115語、下書き1語）**
 
 ## 下書き
 
@@ -172,3 +172,7 @@
 - [ネットワーク（124語）](03_network/00_INDEX.md)
 - [ソフトウェア（136語）](04_software/00_INDEX.md)
 - [ハードウェア（94語）](05_hardware/00_INDEX.md)
+- [マネジメント（67語）](06_management/000_index.md)
+- [システム構成要素（145語）](07_system_components/000_index.md)
+- [ストラテジ（202語）](08_strategy/000_index.md)
+- [セキュリティ（117語）](09_security/000_index.md)

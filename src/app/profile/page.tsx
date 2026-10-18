@@ -3,7 +3,7 @@ import Link from "next/link";
 import { profile } from "@/config/profile";
 
 export const metadata: Metadata = {
-    title: "プロフィール | Huney",
+    title: "プロフィール",
     description: "Huneyの発信方針と、はちみつと学ぶITに込めた考えを紹介します。",
     alternates: { canonical: "/profile" },
 };

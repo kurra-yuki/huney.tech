@@ -106,7 +106,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                 )}
             </nav>
 
-            {usesLearningOrder && <p className="-mb-6 text-sm text-amber-950/55">学習順</p>}
+            {usesLearningOrder && <p className="text-sm text-amber-950/55">学習順</p>}
 
             {articles.length > 0 ? (
                 <section aria-label="記事一覧" className="grid gap-6 md:grid-cols-2">

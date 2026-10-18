@@ -14,11 +14,11 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     const article = getArticleBySlug(slug);
 
     if (!article) {
-        return { title: "記事が見つかりません | Huney" };
+        return { title: "記事が見つかりません" };
     }
 
     return {
-        title: `${article.seoTitle ?? article.title} | Huney`,
+        title: article.seoTitle ?? article.title,
         description: article.description,
         alternates: { canonical: `/articles/${article.slug}` },
         openGraph: {
@@ -40,7 +40,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         notFound();
     }
 
-    const articleHtml = marked.parse(article.content, { async: false });
+    const articleContent = article.content.replace(/^\s*#\s+([^\r\n]+)\r?\n+/, (heading, title: string) =>
+        title.trim() === article.title ? "" : heading
+    );
+    const articleHtml = marked.parse(articleContent, { async: false });
     const relatedArticleLinks = (article.relatedArticles ?? [])
         .map((relatedSlug) => getAllArticles().find((candidate) => candidate.slug === relatedSlug))
         .filter((relatedArticle): relatedArticle is NonNullable<typeof relatedArticle> => relatedArticle !== undefined);

@@ -120,7 +120,7 @@ export default async function GlossaryPage({ searchParams }: GlossaryPageProps) 
                 )}
             </nav>
 
-            {(group === "応用情報（AP）" || group === "Nutanix") && <p className="-mb-6 text-sm text-amber-950/55">学習順</p>}
+            {(group === "応用情報（AP）" || group === "Nutanix") && <p className="text-sm text-amber-950/55">学習順</p>}
 
             {entries.length > 0 ? (
                 <section aria-label="用語一覧" className="grid gap-6 md:grid-cols-2">

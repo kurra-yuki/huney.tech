@@ -12,10 +12,10 @@ type GlossaryDetailProps = {
 export async function generateMetadata({ params }: GlossaryDetailProps): Promise<Metadata> {
     const { slug } = await params;
     const entry = getGlossaryBySlug(slug);
-    if (!entry) return { title: "用語が見つかりません | Huney" };
+    if (!entry) return { title: "用語が見つかりません" };
 
     return {
-        title: `${entry.term}とは？ | IT用語辞典 | Huney`,
+        title: `${entry.term}とは？ | IT用語辞典`,
         description: entry.summary,
         alternates: { canonical: `/glossary/${entry.slug}` },
     };
@@ -26,7 +26,10 @@ export default async function GlossaryDetailPage({ params }: GlossaryDetailProps
     const entry = getGlossaryBySlug(slug);
     if (!entry) notFound();
 
-    const contentHtml = marked.parse(entry.content, { async: false });
+    const entryContent = entry.content.replace(/^\s*#\s+([^\r\n]+)\r?\n+/, (heading, title: string) =>
+        title.trim() === entry.term ? "" : heading
+    );
+    const contentHtml = marked.parse(entryContent, { async: false });
     const relatedTermLinks = (entry.relatedTerms ?? [])
         .map((relatedSlug) => getAllGlossaryEntries().find((candidate) => candidate.slug === relatedSlug))
         .filter((relatedTerm): relatedTerm is NonNullable<typeof relatedTerm> => relatedTerm !== undefined);

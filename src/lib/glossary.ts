@@ -46,6 +46,10 @@ function getCategorySubgroup(filePath: string) {
         if (subgroupDirectory === "03_network") return "ネットワーク";
         if (subgroupDirectory === "04_software") return "ソフトウェア";
         if (subgroupDirectory === "05_hardware") return "ハードウェア";
+        if (subgroupDirectory === "06_management") return "マネジメント";
+        if (subgroupDirectory === "07_system_components") return "システム構成要素";
+        if (subgroupDirectory === "08_strategy") return "ストラテジ";
+        if (subgroupDirectory === "09_security") return "セキュリティ";
         if (order <= 130) return "集合と論理";
         if (order <= 143) return "情報量と符号化";
         if (order <= 160) return "オートマトンと形式言語";
@@ -68,7 +72,7 @@ function getCategorySubgroup(filePath: string) {
 
 function isIndexFile(filePath: string) {
     const fileName = path.basename(filePath).toLowerCase();
-    return fileName === "00_index.md" || fileName === "index.md" || fileName === "readme.md" || /^99_.*\.md$/.test(fileName);
+    return /^0+_index\.md$/.test(fileName) || fileName === "index.md" || fileName === "readme.md" || /^99_.*\.md$/.test(fileName);
 }
 
 function validateFrontmatter(data: Record<string, unknown>, fileName: string): asserts data is GlossaryFrontmatter {

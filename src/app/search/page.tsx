@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { searchContent } from "@/lib/search";
 
 export const metadata: Metadata = {
-    title: "検索 | Huney",
+    title: "検索",
     description: "Huneyの記事と用語辞典を検索します。",
     alternates: { canonical: "/search" },
 };
@@ -59,7 +59,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                         <section aria-labelledby="glossary-results-heading">
                             <h2 id="glossary-results-heading" className="font-serif text-2xl font-bold text-amber-950">用語辞典 <span className="text-base font-normal text-amber-950/50">{results.glossary.length}件</span></h2>
                             <ul className="mt-4 divide-y divide-amber-950/10 rounded-2xl bg-white/60 px-6">
-                                {results.glossary.map((entry) => <li key={entry.slug} className="py-5"><Link href={`/glossary/${entry.slug}`} className="font-serif text-xl font-bold text-amber-950 hover:text-amber-700">{entry.term}</Link><p className="mt-2 text-sm leading-6 text-amber-950/60">{entry.summary}</p></li>)}
+                                {results.glossary.map((entry) => <li key={entry.slug} className="py-5"><p className="text-xs font-semibold text-amber-700">{entry.categoryGroup ? `${entry.categoryGroup} / ${entry.categorySubgroup ?? entry.category}` : entry.category}</p><Link href={`/glossary/${entry.slug}`} className="mt-1 inline-block font-serif text-xl font-bold text-amber-950 hover:text-amber-700">{entry.term}</Link><p className="mt-2 text-sm leading-6 text-amber-950/60">{entry.summary}</p></li>)}
                             </ul>
                         </section>
                     )}

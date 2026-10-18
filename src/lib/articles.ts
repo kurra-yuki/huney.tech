@@ -34,9 +34,10 @@ function getCategorySubgroup(filePath: string) {
         if (subgroupDirectory === "03_network") return "ネットワーク";
         if (subgroupDirectory === "04_software") return "ソフトウェア";
         if (subgroupDirectory === "05_hardware") return "ハードウェア";
-        if (subgroupDirectory === "03_network") return "ネットワーク";
-        if (subgroupDirectory === "04_software") return "ソフトウェア";
-        if (subgroupDirectory === "05_hardware") return "ハードウェア";
+        if (subgroupDirectory === "06_management") return "マネジメント";
+        if (subgroupDirectory === "07_system_components") return "システム構成要素";
+        if (subgroupDirectory === "08_strategy") return "ストラテジ";
+        if (subgroupDirectory === "09_security") return "セキュリティ";
     }
     if (relativePath.startsWith(`05_nutanix${path.sep}`)) {
         const order = getContentOrder(filePath);
@@ -50,7 +51,7 @@ function getCategorySubgroup(filePath: string) {
 
 function isIndexFile(filePath: string) {
     const fileName = path.basename(filePath).toLowerCase();
-    return fileName === "00_index.md" || fileName === "index.md" || /^99_.*\.md$/.test(fileName);
+    return /^0+_index\.md$/.test(fileName) || fileName === "index.md" || /^99_.*\.md$/.test(fileName);
 }
 
 function isValidFrontmatter(data: Record<string, unknown>): data is ArticleFrontmatter {
