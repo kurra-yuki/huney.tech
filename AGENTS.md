@@ -257,6 +257,13 @@ YouTube
 
 Do not make image or video production a requirement for publishing an article.
 
+## Article Publication
+
+- Treat article content shared by the user as editorially reviewed unless the user says otherwise.
+- Do not perform or wait for a second editorial review before publishing user-reviewed content.
+- Run structural/content validation and a production build; publish through the configured production branch when these checks pass.
+- Do not rewrite or silently alter article content during publication work.
+
 ---
 
 # 10. Brand Rules
